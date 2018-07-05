@@ -1,0 +1,85 @@
+<CustButton@Button>:
+    background_normal: ''
+    font_size: 12
+    markup: True
+
+bxL:
+    orientation: 'vertical'
+    padding: 5
+    spacing: 5
+    BoxLayout:
+        spacing: 5
+        orientation: 'horizontal'
+        size_hint: 1,0.5
+        CustButton:
+            text:  root.getText('oprtn1')
+            on_press: root.parent.parent.load_next()
+            background_color: C('#3498DB')
+        CustButton:
+            text:  root.getText('oprtn2')
+            #background_normal:  './images/luminfire-mac-os-x-desktop-background-image-2.jpg'
+            spacing: 1
+            background_color: C('#2ECC71')
+        CustButton:
+            text:  root.getText('oprtn3')
+            spacing: 45
+            background_color: C('#1ABC9C')
+
+    BoxLayout:
+        spacing: 5
+        orientation: 'horizontal'
+        size_hint:1,0.25
+        CustButton:
+            text:  root.getText('rpindl')
+            background_color: C('#27AE60')
+            #background_normal:  './images/luminfire-mac-os-x-desktop-background-image-2.jpg'
+        CustButton:
+            text:  root.getText('rpinmn')
+            background_color: C('#16A085')
+        CustButton:
+            text:  root.getText('rpinan')
+            background_color: C('#E74C3C')
+        CustButton:
+            text:  root.getText('rpinct')
+            background_color: C('#95A5A6')
+        CustButton:
+            text:  root.getText('rpinan')
+            background_color: C('#3498DB')
+        CustButton:
+            text:  root.getText('rpinct')
+            background_color: C('#F3b200')
+    BoxLayout:
+        spacing: 5
+        orientation: 'horizontal'
+        size_hint: 1,0.25
+        CustButton:
+            text:  root.getText('rpotdl')
+            background_color: C('#00D8cc')
+        CustButton:
+            text:  root.getText('rpotmn')
+            background_color: C('#FF1D77')
+        CustButton:
+            text:  root.getText('rpotan')
+            background_color: C('#632F00')
+        CustButton:
+            text:  root.getText('rpotst')
+            background_color: C('#4617B4')
+        CustButton:
+            text:  root.getText('rpotan')
+            background_color: C('#00c13F')
+        CustButton:
+            background_color: C('#C00c36')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                orientation: 'lr-tb'
+                Image:
+                    size_hint:0.4,1
+                    source: './images/noun_Notepad_11215.png'
+                    y: self.parent.y
+                    x: self.parent.x
+                    #size:45,45
+                Label:
+                    size_hint:0.6,1
+                    text: root.getText('rpotst')
+

@@ -1,0 +1,32 @@
+rootWidget:
+    # import boxes
+    # import navBar
+    #:import C kivy.utils.get_color_from_hex
+    boxes: _boxes
+    navBar: _navBar
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'top'
+        BoxLayout:
+            id: _navBar
+            orientation: 'horizontal'
+            size_hint: 1, .05
+            Button:
+                id: burger
+                text: root.getText('burger')
+            Button:
+                id: opertn
+                text: root.getText('opertn')
+            Button:
+                id: report
+                text: root.getText('report')
+            Button:
+                id: config
+                text: root.getText('config')
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        Carousel:
+            id: _boxes
+            size_hint: 1, .95

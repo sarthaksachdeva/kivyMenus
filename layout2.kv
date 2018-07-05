@@ -1,0 +1,48 @@
+bxL:
+    orientation: 'vertical'
+    padding: 10
+    spacing_x: 10
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1,0.5
+        Button:
+            text:  root.getText('oprtn3')
+            font_size: 18
+        Button:
+            text:  root.getText('oprtn2')
+            font_size: 18
+        Button:
+            text:  root.getText('oprtn1')
+            font_size: 18
+            on_press: root.parent.parent.load_previous()
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint:1,0.25
+        Button:
+            text:  root.getText('rpindl')
+            font_size: 18
+        Button:
+            text:  root.getText('rpinmn')
+            font_size: 18
+        Button:
+            text:  root.getText('rpinan')
+            font_size: 18
+        Button:
+            text:  root.getText('rpinct')
+            font_size: 18
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1,0.25
+        Button:
+            text:  root.getText('rpotdl')
+            font_size: 18
+        Button:
+            text:  root.getText('rpotmn')
+            font_size: 18
+        Button:
+            text:  root.getText('rpotan')
+            font_size: 18
+        Button:
+            text:  root.getText('rpotst')
+            font_size: 18
