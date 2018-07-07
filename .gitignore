@@ -1,0 +1,5 @@
+#ignore temporary files
+.idea/
+
+#ignore compiled python files
+*.pyc

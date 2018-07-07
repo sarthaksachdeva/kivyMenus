@@ -4,7 +4,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
 from kivy.uix.carousel import Carousel
 from kivy.uix.boxlayout import BoxLayout
-from kivyDemos.FirstMenuTst.texts import textArray, widgetDict
+from texts import textArray, widgetDict
 from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
 
