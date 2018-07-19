@@ -1,0 +1,140 @@
+#:import C kivy.utils.get_color_from_hex
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+navBar:
+    canvas.before:
+        Color:
+            rgba: .24, .65, .94, .7
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    id: navBarMenu
+    orientation: 'horizontal'
+    size_hint: 1, .07
+
+    #WIDGET 1
+    FocusButton3:
+        size_hint: 0.2, 1
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: burger
+        on_press: burgerGif._coreimage.anim_reset(True)
+        on_release: burgerDD.open(self)
+        attachedTo: burgerDD
+        Image:
+            id: burgerGif
+            source: './images/burgerIcon2Mod.gif'
+            allow_stretch: True
+            anim_delay:0.05
+            anim_loop: 1
+            y: self.parent.y
+            x: self.parent.x
+            size:self.parent.width + 10 ,self.parent.height + 10
+    CustomDropDown:
+        id: burgerDD
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('opertn')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('report')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('config')
+            size_hint_y: None
+            height: 44
+
+    #Label:
+        #background_color: (0.0, 0.0, 0.0, 0)
+        #size_hint:0.1,1
+    #WIDGET 2
+    FocusButton3:
+        size_hint: 0.46, 1
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: Heading
+        StackLayout:
+            pos: self.parent.pos
+            size: self.parent.size
+            padding: 0
+            spacing: 0
+            orientation: 'lr-tb'
+
+            Button:
+                background_normal: ''
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint:0.15,1
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                #canvas.before:
+                    #Color:
+                       # rgba: root.ColorMenuIcon
+                    #Ellipse:
+                        #size_hint:0.5,1
+                        #size: self.size
+                        #pos: self.pos
+                Image:
+                    size: self.parent.size
+                    x: self.parent.x
+                    y: self.parent.y
+                    source: root.Icon
+
+
+
+            Label:
+                font_name:'Helsinki'
+                size_hint:0.6,1
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                text: root.MenuName
+
+
+    Label:
+        background_color: (0.0, 0.0, 0.0, 0)
+        size_hint:0.1,1
+
+    #HOME
+    FocusButton3:
+        id: homeButton
+        nextScreen: 'mainMenu'
+        transition: FallOutTransition()
+        size_hint: 0.08, 1
+        background_color: (0.0, 0.0, 0.0, 0)
+        on_release:
+            app.root.transition = self.transition
+            app.root.current = 'mainMenu'
+        Image:
+            source: './images/homePage4.png'
+            size: self.parent.size
+            x: self.parent.x
+            y: self.parent.y
+    #KEYBOARD MODE
+    FocusButton3:
+        size_hint: 0.08, 1
+        background_color: (0.0, 0.0, 0.0, 0)
+        Image:
+            source: './images/keyboard.png'
+            size: self.parent.size
+            x: self.parent.x
+            y: self.parent.y
+
+    #QUICK VIEW
+    FocusButton3:
+        size_hint: 0.08, 1
+        background_color: (0.0, 0.0, 0.0, 0)
+        Image:
+            source: './images/quickview.png'
+            size: self.parent.size
+            x: self.parent.x
+            y: self.parent.y
+        Widget:
+            background_color: (0.0, 0.0, 0.0, 0)
+            size_hint: 0.00000000000001,1
+            on_parent: burgerDD.dismiss()

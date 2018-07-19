@@ -1,8 +1,5 @@
-<CustButton@Button>:
-    background_normal: ''
-    font_size: 12
-    markup: True
-
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
 bxL:
     orientation: 'vertical'
     padding: 5
@@ -11,77 +8,328 @@ bxL:
         spacing: 5
         orientation: 'horizontal'
         size_hint: 1,0.5
-        CustButton:
-            text:  root.getText('oprtn1')
+        FocusButton:
+            focus: True
             on_press: root.parent.parent.load_next()
             background_color: C('#3498DB')
-        CustButton:
-            text:  root.getText('oprtn2')
-            #background_normal:  './images/luminfire-mac-os-x-desktop-background-image-2.jpg'
-            spacing: 1
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/milkCollection2.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 14
+                    text_size: self.size
+                    text:  root.getText('oprtn1')
+        FocusButton:
+            nextScreen: 'firstCollectionMenu'
+            transition: RiseInTransition()
+            focus: True
+            on_release:
+                app.root.transition = self.transition
+                app.root.current = 'firstCollectionMenu'
             background_color: C('#2ECC71')
-        CustButton:
-            text:  root.getText('oprtn3')
-            spacing: 45
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/operationsOutbound.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 14
+                    text_size: self.size
+                    text:  root.getText('oprtn2')
+        FocusButton:
+            focus: True
             background_color: C('#1ABC9C')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/union.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 14
+                    text_size: self.size
+                    text:  root.getText('oprtn3')
 
     BoxLayout:
         spacing: 5
         orientation: 'horizontal'
         size_hint:1,0.25
-        CustButton:
-            text:  root.getText('rpindl')
+        FocusButton:
+            focus: True
             background_color: C('#27AE60')
-            #background_normal:  './images/luminfire-mac-os-x-desktop-background-image-2.jpg'
-        CustButton:
-            text:  root.getText('rpinmn')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports2.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpindl')
+        FocusButton:
+            focus: True
             background_color: C('#16A085')
-        CustButton:
-            text:  root.getText('rpinan')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports3.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpinmn')
+        FocusButton:
+            focus: True
             background_color: C('#E74C3C')
-        CustButton:
-            text:  root.getText('rpinct')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports4.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpinan')
+        FocusButton:
+            focus: True
             background_color: C('#95A5A6')
-        CustButton:
-            text:  root.getText('rpinan')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports6.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpinct')
+        FocusButton:
+            focus: True
             background_color: C('#3498DB')
-        CustButton:
-            text:  root.getText('rpinct')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports8.gif'
+                    anim_delay: 0.08
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpinan')
+        FocusButton:
+            focus: True
             background_color: C('#F3b200')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/customer2.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpinct')
     BoxLayout:
         spacing: 5
         orientation: 'horizontal'
         size_hint: 1,0.25
-        CustButton:
-            text:  root.getText('rpotdl')
+        FocusButton:
+            focus: True
             background_color: C('#00D8cc')
-        CustButton:
-            text:  root.getText('rpotmn')
-            background_color: C('#FF1D77')
-        CustButton:
-            text:  root.getText('rpotan')
-            background_color: C('#632F00')
-        CustButton:
-            text:  root.getText('rpotst')
-            background_color: C('#4617B4')
-        CustButton:
-            text:  root.getText('rpotan')
-            background_color: C('#00c13F')
-        CustButton:
-            background_color: C('#C00c36')
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
-                orientation: 'lr-tb'
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
                 Image:
-                    size_hint:0.4,1
-                    #source: './images/noun_Notepad_11215.png'
-                    source: './images/icons-gif-11.gif'
-                    anim_delay:0.05
-                    y: self.parent.y
-                    x: self.parent.x
-                    #size:45,45
+                    source: './images/reports9.gif'
+                    anim_delay: 0.02
+                    size_hint:1,0.8
                 Label:
-                    size_hint:0.6,1
-                    text: root.getText('rpotst')
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpotdl')
+        FocusButton:
+            focus: True
+            background_color: C('#FF1D77')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports10.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpotmn')
+        FocusButton:
+            focus: True
+            background_color: C('#632F00')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports11.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpotan')
+        FocusButton:
+            focus: True
+            background_color: C('#4617B4')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports7.gif'
+                    anim_delay: 0.05
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpotst')
+        FocusButton:
+            focus: True
+            background_color: C('#00c13F')
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/reports15.png'
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('rpotan')
+        FocusButton:
+            nextScreen: 'home'
+            transition: WipeTransition()
+            focus: True
+            background_color: C('#000000')
+            on_release:
+                app.root.transition = self.transition
+                app.root.current = 'home'
+            StackLayout:
+                pos: self.parent.pos
+                size: self.parent.size
+                padding: 10
+                spacing: 0
+                orientation: 'tb-lr'
+
+                Image:
+                    source: './images/cubes.gif'
+                    anim_delay: 0.05
+                    size_hint:1,0.8
+                Label:
+                    size_hint:1,0.2
+                    halign: 'left'
+                    valign: 'bottom'
+                    font_size: 12
+                    text_size: self.size
+                    text:  root.getText('settng')
 

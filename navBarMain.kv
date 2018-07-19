@@ -1,0 +1,269 @@
+#:import C kivy.utils.get_color_from_hex
+navBar:
+    canvas.before:
+        Color:
+            rgba: .24, .65, .94, .7
+            #rgb: C('#29b6f6')
+            #rgba: .0, .0, .0, .3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            #source: './images/navbarBackground.jpg'
+    id: navBarMenu
+    orientation: 'horizontal'
+    size_hint: 1, .07
+
+    #WIDGET 1
+    FocusButton3:
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: burger
+        on_press: burgerGif._coreimage.anim_reset(True)
+        on_release: burgerDD.open(self)
+        attachedTo: burgerDD
+        Image:
+            id: burgerGif
+            source: './images/burgerIcon2Mod.gif'
+            allow_stretch: True
+            anim_delay:0.05
+            anim_loop: 1
+            y: self.parent.y
+            x: self.parent.x
+            size:self.parent.width + 10 ,self.parent.height + 10
+    CustomDropDown:
+        id: burgerDD
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('opertn')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('report')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('config')
+            size_hint_y: None
+            height: 44
+
+    #WIDGET 2
+    FocusButton3:
+        attachedTo: operationDD
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: opertn
+        on_release: operationDD.open(self)
+        StackLayout:
+            pos: self.parent.pos
+            size: self.parent.size
+            padding: 0
+            spacing: 0
+            orientation: 'lr-tb'
+
+            Image:
+                source: './images/operationsIcon.png'
+                size_hint:0.5,0.8
+            Label:
+                font_name:'Helsinki'
+                size_hint:0.5,1
+                halign: 'left'
+                valign: 'middle'
+                font_size: 12
+                text_size: self.size
+                text: root.getText('opertn')
+
+    CustomDropDown:
+        id: operationDD
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('inbndl')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('outblc')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('outbun')
+            size_hint_y: None
+            height: 44
+
+    #WIDGET 3
+    FocusButton3:
+        attachedTo: reportDD
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: report
+        on_release: reportDD.open(self)
+        StackLayout:
+            pos: self.parent.pos
+            size: self.parent.size
+            padding: 0
+            spacing: 0
+            orientation: 'lr-tb'
+
+            Image:
+                source: './images/reportIcon.png'
+                size_hint:0.5,0.9
+            Label:
+                font_name:'Helsinki'
+                size_hint:0.5,1
+                halign: 'left'
+                valign: 'middle'
+                font_size: 12
+                text_size: self.size
+                text: root.getText('report')
+    CustomDropDown:
+        id: reportDD
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('inboun')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('outbnd')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('stocks')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('paymen')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('tchart')
+            size_hint_y: None
+            height: 44
+
+    #WIDGET 4
+    FocusButton3:
+        attachedTo: configDD
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: config
+        on_release: configDD.open(self)
+        StackLayout:
+            pos: self.parent.pos
+            size: self.parent.size
+            padding: 0
+            spacing: 0
+            orientation: 'lr-tb'
+
+            Image:
+                source: './images/configIcon.png'
+                size_hint:0.5,0.9
+            Label:
+                font_name:'Helsinki'
+                size_hint:0.5,1
+                halign: 'left'
+                valign: 'middle'
+                font_size: 12
+                text_size: self.size
+                text: root.getText('config')
+    CustomDropDown:
+        id: configDD
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('custmr')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('device')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('tariff')
+            size_hint_y: None
+            height: 44
+
+
+    #WIDGET 5
+    FocusButton3:
+        attachedTo: aboutDD
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: about
+        on_release: aboutDD.open(self)
+        StackLayout:
+            pos: self.parent.pos
+            size: self.parent.size
+            padding: 0
+            spacing: 0
+            orientation: 'lr-tb'
+
+            Image:
+                source: './images/aboutIcon.png'
+                size_hint:0.5,0.9
+            Label:
+                font_name:'Helsinki'
+                size_hint:0.5,1
+                halign: 'left'
+                valign: 'middle'
+                font_size: 12
+                text_size: self.size
+                text: root.getText('about')
+
+
+    CustomDropDown:
+        id: aboutDD
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('help')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('contct')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('credit')
+            size_hint_y: None
+            height: 44
+
+    Widget:
+        background_color: (0.0, 0.0, 0.0, 0)
+        size_hint: 0.00000000000001,1
+        on_parent: aboutDD.dismiss()
+        on_parent: reportDD.dismiss()
+        on_parent: configDD.dismiss()
+        on_parent: operationDD.dismiss()
+        on_parent: burgerDD.dismiss()

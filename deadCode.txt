@@ -1,0 +1,116 @@
+
+    #to switch focus on tab instead of write for text input
+    # def keyboard_on_key_down(self, window, keycode, text, modifiers):
+    #
+    #     if keycode[1] == 'tab':  # deal with cycle
+    #         if ['shift'] == modifiers:
+    #             next = self.get_focus_previous()
+    #         else:
+    #             next = self.get_focus_next()
+    #         if next:
+    #             self.focus = False
+    #
+    #             next.focus = True
+    #
+    #         return True
+    #     else:
+    #         super(FocusTextInput, self).keyboard_on_key_down(window, keycode,text, modifiers)
+    #     return False
+
+
+
+    #HOME
+                FocusButton2:
+                    id: homeButton
+                    nextScreen: 'mainMenu'
+                    transition: FallOutTransition()
+                    size_hint: 0.1, 1
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    on_release:
+                        app.root.transition = self.transition
+                        app.root.current = 'mainMenu'
+                    Image:
+                        source: './images/homePage4.png'
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                #KEYBOARD MODE
+                FocusButton2:
+                    size_hint: 0.1, 1
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    Image:
+                        source: './images/keyboard.png'
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+
+                #QUICK VIEW
+                FocusButton2:
+                    size_hint: 0.1, 1
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    Image:
+                        source: './images/quickview.png'
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+
+                #WIDGET 1
+    FocusButton3:
+        size_hint: 0.1, 1
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: back
+        nextScreen: 'mainMenu'
+        transition: FallOutTransition()
+        on_release:
+            app.root.transition = self.transition
+            app.root.current = 'mainMenu'
+        Image:
+            id: backImage
+            source: './images/backButton.png'
+            allow_stretch: True
+            y: self.parent.y
+            x: self.parent.x
+            size:self.parent.width + 10 ,self.parent.height + 10
+
+
+
+       #WIDGET 1
+    FocusButton3:
+        size_hint: 0.2, 1
+        background_color: (0.0, 0.0, 0.0, 0)
+        id: burger
+        on_press: burgerGif._coreimage.anim_reset(True)
+        on_release: burgerDD.open(self)
+        attachedTo: burgerDD
+        Image:
+            id: burgerGif
+            source: './images/burgerIcon2Mod.gif'
+            allow_stretch: True
+            anim_delay:0.05
+            anim_loop: 1
+            y: self.parent.y
+            x: self.parent.x
+            size:self.parent.width + 10 ,self.parent.height + 10
+    CustomDropDown:
+        id: burgerDD
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 0.9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('opertn')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('report')
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: root.getText('config')
+            size_hint_y: None
+            height: 44

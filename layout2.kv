@@ -3,6 +3,14 @@ bxL:
     padding: 10
     spacing_x: 10
     BoxLayout:
+        canvas.before:
+            Color:
+                rgb: 0,1,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        spacing: 10
+        background_color: C('#97b7fc')
         orientation: 'horizontal'
         size_hint: 1,0.5
         Button:

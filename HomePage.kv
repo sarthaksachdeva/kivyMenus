@@ -1,0 +1,127 @@
+#:import C kivy.utils.get_color_from_hex
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+HomePage:
+    firstFocusWidget: name
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './images/metroUiLogin.jpg'
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            padding: 0
+            spacing: 0
+            size_hint: 0.45, 0.55
+            orientation: 'vertical'
+
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.35
+                Image:
+                    source: './images/logo.png'
+                    size: self.parent.size
+                    x: self.parent.x
+                    y: self.parent.y
+
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.07
+
+            StackLayout:
+                padding: 0
+                spacing: 0
+                orientation: 'lr-tb'
+                size_hint: 1, 0.15
+                Button:
+
+                    size_hint: 0.1, 1
+                    background_color: (212, 216, 213, 0.8)
+                    Image:
+                        source: './images/userNameIcon3.png'
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                FocusTextInput:
+                    id: name
+                    size_hint: 0.9,1
+                    background_color: (212, 216, 213, 0.8)
+                    #background_color: (0, 0, 0, 0)
+                    text: 'Name'
+                    focus: True
+                    focused: True
+                    multiline: False
+
+            StackLayout:
+                padding: 0
+                spacing: 0
+                orientation: 'lr-tb'
+                size_hint: 1, 0.15
+                Button:
+                    size_hint: 0.1, 1
+                    background_color: (212, 216, 213, 0.8)
+                    Image:
+                        source: './images/password.png'
+                        #size: self.parent.width*0.7,self.parent.height*0.7
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                FocusTextInput:
+                    id: passw
+                    size_hint: 0.9,1
+                    background_color: (212, 216, 213, 0.8)
+                    text: 'Password'
+                    focus: True
+                    multiline: False
+                    password: True
+                    allow_copy: False
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.03
+
+            FocusButton:
+                nextScreen: 'mainMenu'
+                transition: WipeTransition()
+                id: login
+                size_hint: 1, 0.15
+                background_color: C('#19b74e')
+                on_release:
+                    app.root.transition = self.transition
+                    app.root.transition.direction = 'right'
+                    app.root.current = 'mainMenu'
+
+                font_size: 14
+                text: 'Login'
+                focus: True
+
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.02
+
+
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'center'
+                size_hint: 1, 0.07
+                BoxLayout:
+                    padding: 0
+                    spacing: 0
+                    orientation: 'horizontal'
+                    size_hint: 0.55,1
+                    FocusButton2:
+                        id: signup
+                        size_hint: 0.38, 1
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        font_size: 14
+                        text: 'Sign up?'
+                        focus: True
+
+                    FocusButton2:
+                        id: flogin
+                        size_hint: 0.62, 1
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        font_size: 14
+                        text: 'forget password?'
+                        focus: True

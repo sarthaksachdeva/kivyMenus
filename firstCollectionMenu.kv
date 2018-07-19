@@ -1,0 +1,609 @@
+#:import C kivy.utils.get_color_from_hex
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+firstCollectionMenu:
+    navBar: _navbar
+    firstFocusWidget: Mode
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            canvas.before:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: './images/dataCollBackground3.jpg'
+            size_hint: 1, 1
+            orientation: 'vertical'
+
+            #V SPACING LABEL
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.14
+
+            #MODE SELECTOR MENU
+            BoxLayout:
+                size_hint: 1,0.07
+                orientation: 'horizontal'
+                canvas.before:
+                    Color:
+                        rgba: .0, .0, .0, .0
+                        #rgba: .24, .65, .94, .7
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+
+                # H SPACER
+                Label:
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    size_hint: 0.2, 1
+
+                #MODE
+                FocusButton2:
+                    id: Mode
+                    attachedTo: dropdown1
+                    size_hint: 0.2, 1
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    on_release: dropdown1.open(self)
+                    StackLayout:
+                        pos: self.parent.pos
+                        size: self.parent.size
+                        padding: 0
+                        spacing: 0
+                        orientation: 'lr-tb'
+
+                        Label:
+                            id: btn1
+                            size_hint:0.5,1
+                            halign: 'right'
+                            valign: 'middle'
+                            text_size: self.size
+                            text: 'Mode'
+                        Image:
+                            source: './images/dropDown.png'
+                            size_hint:0.5,0.9
+
+
+                CustomDropDown:
+                    id: dropdown1
+                    on_select: btn1.text = '{}'.format(args[1])
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 0.3
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                            source: './images/navbarBackground.jpg'
+
+                    FocusButton2:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        text: 'Manual'
+                        size_hint_y: None
+                        height: '25dp'
+                        on_release: dropdown1.select('Manual')
+
+                    FocusButton2:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        text: 'Auto'
+                        size_hint_y: None
+                        height: '25dp'
+                        on_release: dropdown1.select('Auto')
+
+                #SPACER
+                Widget:
+                    size_hint: 0.00000000000001,1
+                    on_parent: dropdown1.dismiss()
+                    on_parent: dropdown3.dismiss()
+                    on_parent: dropdownT.dismiss()
+
+
+                #DATE TIME
+                FocusButton2:
+                    size_hint: 0.2, 1
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    StackLayout:
+                        pos: self.parent.pos
+                        size: self.parent.size
+                        padding: 0
+                        spacing: 0
+                        orientation: 'lr-tb'
+
+                        Image:
+                            source: './images/dateTime.png'
+                            size_hint:0.5,0.9
+                        Label:
+                            size_hint:0.5,1
+                            halign: 'left'
+                            valign: 'middle'
+                            font_size: 12
+                            text_size: self.size
+                            text: 'Date Time'
+
+                #SESSION
+                FocusButton2:
+                    attachedTo: dropdown3
+                    size_hint: 0.2, 1
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    on_release: dropdown3.open(self)
+                    StackLayout:
+                        pos: self.parent.pos
+                        size: self.parent.size
+                        padding: 0
+                        spacing: 0
+                        orientation: 'lr-tb'
+
+                        Label:
+                            id: btn2
+                            size_hint:0.5,1
+                            halign: 'right'
+                            valign: 'middle'
+                            text_size: self.size
+                            text: 'Session'
+                        Image:
+                            source: './images/dropDown.png'
+                            size_hint:0.5,0.9
+
+                CustomDropDown:
+                    id: dropdown3
+                    on_select: btn2.text = '{}'.format(args[1])
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 0.3
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                            source: './images/navbarBackground.jpg'
+
+                    FocusButton2:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        text: 'Morning'
+                        size_hint_y: None
+                        height: '25dp'
+                        on_release: dropdown3.select('Morning')
+
+                    FocusButton2:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        text: 'Evening'
+                        size_hint_y: None
+                        height: '25dp'
+                        on_release: dropdown3.select('Evening')
+
+                # H SPACER
+                Label:
+                    background_color: (0.0, 0.0, 0.0, 0)
+                    size_hint: 0.2, 1
+
+            #V SPACING LABEL
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.07
+
+            # NAME ID SECTION
+            AnchorLayout:
+                size_hint: 1,0.26
+                anchor_x: 'center'
+                anchor_y: 'top'
+
+                BoxLayout:
+                    size_hint: 0.95,1
+                    canvas.before:
+                        BorderImage:
+                            pos: self.pos
+                            size: self.size
+                            source: './images/blackBorderImage.png'
+                        Color:
+                            rgba: 0.592, 0.718,0.984,1 #background_color: C('#97b7fc')
+                        #coz color jayega kisme if you don't add this
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    orientation: 'vertical'
+
+                    #HEADING CUSTOMER
+                    Button:
+                        font_name: 'Jellee-Roman'
+                        background_normal: ''
+                        background_color: C('#003f77')
+                        padding: 10,10
+                        size_hint: 1, 0.3
+                        halign: 'left'
+                        valign: 'top'
+                        font_size: self.height/2
+                        text_size: self.size
+                        text: 'Customer'
+
+                    BoxLayout:
+                        size_hint: 1, 0.4
+                        orientation: 'horizontal'
+
+                        #ID
+                        Label:
+                            size_hint: 0.1, 0.5
+                            text: 'ID:'
+                            font_name: 'Jellee-Roman'
+                        #INPUT
+                        FocusTextInput:
+                            font_name: 'Jellee-Roman'
+                            #To draw A line and transparent bg
+                            #canvas.before:
+                                #Line:
+                                   # points: self.x,self.y, self.x+self.width,self.y
+                            background_color: (212, 216, 213, 0.8)
+                            size_hint: 0.2, 0.5
+                            focus: True
+                            multiline: False
+
+                        #SPACING LABEL
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.1, 1
+
+                        #NAME
+                        Label:
+                            size_hint: 0.2, 0.5
+                            text: 'Name:'
+                            font_name: 'Jellee-Roman'
+
+                        #INPUT
+                        FocusTextInput:
+                            padding_y: 0
+                            font_name: 'Jellee-Roman'
+                            size_hint: 0.3, 0.5
+                            focus: True
+                            multiline: False
+                            background_color: (212, 216, 213, 0.8)
+
+                        #SPACING LABEL
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.1, 1
+
+                    #SPACING LABEL
+                    Label:
+                        #background_color: (0.0, 0.0, 0.0, 0)
+                        size_hint: 1, 0.3
+
+            #SPACING LABEL
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.07
+
+            #COLLECTION AND AMMOUNT
+            AnchorLayout:
+                size_hint: 1,0.26
+                anchor_x: 'center'
+                anchor_y: 'top'
+                BoxLayout:
+                    size_hint: 0.95,1
+                    orientation: 'horizontal'
+
+                    #COLLECTION
+                    BoxLayout:
+                        size_hint: 0.75,1
+                        canvas.before:
+                            BorderImage:
+                                pos: self.pos
+                                size: self.size
+                                source: './images/blackBorderImage.png'
+                            Color:
+                                rgba: 0.592, 0.718,0.984,1 #background_color: C('#97b7fc')
+                            #coz color jayega kisme if you don't add this
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                        orientation: 'vertical'
+
+                        #LABEL
+                        Button:
+                            font_name: 'Jellee-Roman'
+                            background_normal: ''
+                            background_color: C('#003f77')
+                            padding: 10,10
+                            size_hint: 1, 0.3
+                            halign: 'left'
+                            valign: 'top'
+                            font_size: self.height/2
+                            text_size: self.size
+                            text: 'Collection'
+
+                        #V SPACING LABEL
+                        Label:
+                            size_hint: 1, 0.05
+
+                        #TARIFF AND MILK TYPE
+                        BoxLayout:
+                            size_hint: 1, 0.3
+                            orientation: 'horizontal'
+
+                            #MILK TYPE
+                            Label:
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.2, 1
+                                text: 'Milk Type:'
+                                padding: 10,0
+                            #INPUT
+                            FocusTextInput:
+                                padding_y: 0
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.2, 0.7
+                                focus: True
+                                multiline: False
+                                background_color: (212, 216, 213, 0.8)
+
+                            #H SPACING LABEL
+                            Label:
+                                background_color: (0.0, 0.0, 0.0, 0)
+                                size_hint: 0.05, 1
+
+                            #TARIFF
+                            Label:
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.15, 1
+                                text: 'Tariff:'
+
+                            #INPUT VIA DROPDOWN
+                            FocusButton2:
+                                attachedTo: dropdownT
+                                canvas.before:
+                                    Line:
+                                        points: self.x,self.y + 10, self.x+self.width,self.y + 10
+                                size_hint: 0.3, 1
+                                background_color: (0.0, 0.0, 0.0, 0)
+                                on_release: dropdownT.open(self)
+                                StackLayout:
+                                    pos: self.parent.pos
+                                    size: self.parent.size
+                                    padding: 0
+                                    spacing: 0
+                                    orientation: 'lr-tb'
+
+                                    Label:
+                                        id: btnT
+                                        font_name: 'Jellee-Roman'
+                                        size_hint:0.5,1
+                                        halign: 'right'
+                                        valign: 'middle'
+                                        text_size: self.size
+                                        text: 'Tariff'
+                                    Image:
+                                        source: './images/dropDown.png'
+                                        size_hint:0.5,0.9
+
+                            # CORRESPONDING DROP DOWN
+                            CustomDropDown:
+                                id: dropdownT
+                                on_select: btnT.text = '{}'.format(args[1])
+                                canvas.before:
+                                    Color:
+                                        rgba: 0, 0, 0, 0.3
+                                    Rectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        source: './images/navbarBackground.jpg'
+
+                                FocusButton2:
+                                    font_name: 'Jellee-Roman'
+                                    background_color: (0.0, 0.0, 0.0, 0)
+                                    text: 'Tariff1'
+                                    size_hint_y: None
+                                    height: '25dp'
+                                    on_release: dropdownT.select('Tariff1')
+
+                                FocusButton2:
+                                    font_name: 'Jellee-Roman'
+                                    background_color: (0.0, 0.0, 0.0, 0)
+                                    text: 'Tariff2'
+                                    size_hint_y: None
+                                    height: '25dp'
+                                    on_release: dropdownT.select('Tariff2')
+
+
+                            #H SPACING LABEL AFTER DROPDOWN
+                            Label:
+                                background_color: (0.0, 0.0, 0.0, 0)
+                                size_hint: 0.1, 1
+
+                        #V SPACING LABEL BW 2 ROWS OF INPUT
+                        Label:
+                            size_hint: 1, 0.05
+
+                        #FAT AND WEIGHT
+                        BoxLayout:
+                            size_hint: 1, 0.3
+                            orientation: 'horizontal'
+
+                            #WEIGHT
+                            Label:
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.2, 1
+                                text: 'Weight:'
+                            #INPUT
+                            FloatTextInput:
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.15, 0.7
+                                focus: True
+                                multiline: False
+                                background_color: (212, 216, 213, 0.8)
+                            #KG
+                            Label:
+                                font_name: 'Jellee-Roman'
+                                background_color: (0.0, 0.0, 0.0, 0)
+                                size_hint: 0.05, 1
+                                text: 'Kg'
+
+                            # H SPACING LABEL BW WEIGHT AND FAT
+                            Label:
+                                background_color: (0.0, 0.0, 0.0, 0)
+                                size_hint: 0.05, 1
+
+                            #FAT
+                            Label:
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.15, 1
+                                text: 'Fat:'
+
+                            #INPUT
+                            FloatTextInput:
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.15, 0.7
+                                focus: True
+                                multiline: False
+                                background_color: (212, 216, 213, 0.8)
+
+                            #UNIT
+                            Label:
+                                font_name: 'Jellee-Roman'
+                                background_color: (0.0, 0.0, 0.0, 0)
+                                size_hint: 0.05, 1
+                                text: 'unit'
+
+                            #H SPACING LABEL AFTER FAT
+                            Label:
+                                background_color: (0.0, 0.0, 0.0, 0)
+                                size_hint: 0.2, 1
+
+
+                        #H SPACING LABEL BW AMOUNT AND COLLECTION
+                        Label:
+                            size_hint: 1, 0.1
+
+                    #H SPACING LABEL BW AMOUNT AND COLLECTION
+                    Label:
+                        size_hint: 0.05, 1
+
+                    #AMOUNT
+                    BoxLayout:
+                        size_hint: 0.2,1
+                        canvas.before:
+                            BorderImage:
+                                pos: self.pos
+                                size: self.size
+                                source: './images/blackBorderImage.png'
+                            Color:
+                                rgba: 0.592, 0.718,0.984,1 #background_color: C('#97b7fc')
+                            #coz color jayega kisme if you don't add this
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+                        orientation: 'vertical'
+
+                        Button:
+                            font_name: 'Jellee-Roman'
+                            background_normal: ''
+                            background_color: C('#003f77')
+                            padding: 10,10
+                            size_hint: 1, 0.3
+                            halign: 'left'
+                            valign: 'top'
+                            font_size: self.height/2
+                            text_size: self.size
+                            text: 'Amount'
+
+                        # V SPACER BW AMOUNT AND INPUT
+                        Label:
+                            size_hint: 1, 0.1
+
+                        BoxLayout:
+                            size_hint: 1, 0.3
+                            orientation: 'horizontal'
+                            Button:
+                                size_hint: 0.4,1
+                                background_color: (0,0,0,0)
+                                Image:
+                                    size: self.parent.size
+                                    pos: self.parent.pos
+                                    source: './images/RsIcon.png'
+
+                            #H SPACER BW RS AND INPUT
+                            Label:
+                                size_hint: 0.05, 1
+                            #INPUT
+                            FloatTextInput:
+                                font_name: 'Jellee-Roman'
+                                size_hint: 0.4, 0.7
+                                focus: True
+                                multiline: False
+                                background_color: (212, 216, 213, 0.8)
+
+                            #H SPACER AFTER INPUT
+                            Label:
+                                size_hint: 0.15, 1
+                        #H SPACER AFTER INPUT
+                        Label:
+                            size_hint: 1, 0.2
+
+
+
+
+            # V SPACER BW COLLECTION/AMOUNT AND BUTTONS
+            Label:
+                size_hint: 1, 0.07
+
+            # PRINT, SAVE BUTTONS
+            BoxLayout:
+                size_hint: 1,0.13
+                orientation: 'horizontal'
+
+                # H SPACER BEFORE BUTTONS
+                Label:
+                    size_hint: 0.1, 1
+
+                #SAVE BUTTON
+                FocusButton2:
+                    size_hint: 0.2,1
+                    background_color: (0,0,0,0)
+                    Image:
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                        source: './images/saveButton3.png'
+
+                # H SPACER BW BUTTONS
+                Label:
+                    size_hint: 0.05, 1
+
+                #PRINT BUTTON
+                ImageButton:
+                    size_hint: 0.2,1
+                    background_color: (0,0,0,0)
+                    Image:
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                        source: './images/printButton2.png'
+
+                # H SPACER BW BUTTONS
+                Label:
+                    size_hint: 0.05, 1
+
+                #DISCARD BUTTON
+                FocusButton2:
+                    size_hint: 0.2,1
+                    background_color: (0,0,0,0)
+                    on_release:
+                        trashCan._coreimage.anim_reset(True)
+
+                    Image:
+                        id: trashCan
+                        allow_stretch: True
+                        anim_delay:0.05
+                        anim_loop: 1
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                        source: './images/discardButton5.png'
+
+                # H SPACER AFTER BUTTONS
+                Label:
+                    size_hint: 0.1, 1
+
+            # V SPACER AFTER BUTTON
+            Label:
+                size_hint: 1, 0.07
+
+
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'top'
+        id: _navbar
