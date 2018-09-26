@@ -4,10 +4,12 @@ bxL:
     orientation: 'vertical'
     padding: 5
     spacing: 5
+    #ROW 1
     BoxLayout:
         spacing: 5
         orientation: 'horizontal'
         size_hint: 1,0.5
+
         FocusButton:
             focus: True
             on_press: root.parent.parent.load_next()
@@ -29,6 +31,7 @@ bxL:
                     font_size: 14
                     text_size: self.size
                     text:  root.getText('oprtn1')
+        #MILK COLLECTION
         FocusButton:
             nextScreen: 'firstCollectionMenu'
             transition: RiseInTransition()
@@ -54,8 +57,14 @@ bxL:
                     font_size: 14
                     text_size: self.size
                     text:  root.getText('oprtn2')
+        # ADD CUSTOMER
         FocusButton:
+            nextScreen: 'CustomerMenu'
+            transition: RiseInTransition()
             focus: True
+            on_release:
+                app.root.transition = self.transition
+                app.root.current = 'CustomerMenu'
             background_color: C('#1ABC9C')
             StackLayout:
                 pos: self.parent.pos
@@ -75,6 +84,7 @@ bxL:
                     text_size: self.size
                     text:  root.getText('oprtn3')
 
+    #ROW 2
     BoxLayout:
         spacing: 5
         orientation: 'horizontal'
@@ -82,6 +92,8 @@ bxL:
         FocusButton:
             focus: True
             background_color: C('#27AE60')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -100,8 +112,9 @@ bxL:
                     text_size: self.size
                     text:  root.getText('rpindl')
         FocusButton:
-            focus: True
             background_color: C('#16A085')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -120,8 +133,9 @@ bxL:
                     text_size: self.size
                     text:  root.getText('rpinmn')
         FocusButton:
-            focus: True
             background_color: C('#E74C3C')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -140,8 +154,15 @@ bxL:
                     text_size: self.size
                     text:  root.getText('rpinan')
         FocusButton:
+            nextScreen: 'CustomerDb'
+            transition: RiseInTransition()
             focus: True
+            on_release:
+                app.root.transition = self.transition
+                app.root.current = 'CustomerDb'
             background_color: C('#95A5A6')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -162,6 +183,8 @@ bxL:
         FocusButton:
             focus: True
             background_color: C('#3498DB')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -171,7 +194,7 @@ bxL:
 
                 Image:
                     source: './images/reports8.gif'
-                    anim_delay: 0.08
+                    anim_delay:-1 if self.parent.parent.disabled else 0.08
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2
@@ -183,6 +206,8 @@ bxL:
         FocusButton:
             focus: True
             background_color: C('#F3b200')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -200,13 +225,17 @@ bxL:
                     font_size: 12
                     text_size: self.size
                     text:  root.getText('rpinct')
+    # ROW 3
     BoxLayout:
         spacing: 5
         orientation: 'horizontal'
         size_hint: 1,0.25
+        #CUSTOMER
         FocusButton:
             focus: True
             background_color: C('#00D8cc')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -216,7 +245,7 @@ bxL:
 
                 Image:
                     source: './images/reports9.gif'
-                    anim_delay: 0.02
+                    anim_delay: -1 if self.parent.parent.disabled else 0.02
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2
@@ -228,6 +257,8 @@ bxL:
         FocusButton:
             focus: True
             background_color: C('#FF1D77')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -245,9 +276,12 @@ bxL:
                     font_size: 12
                     text_size: self.size
                     text:  root.getText('rpotmn')
+
         FocusButton:
             focus: True
             background_color: C('#632F00')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -265,9 +299,12 @@ bxL:
                     font_size: 12
                     text_size: self.size
                     text:  root.getText('rpotan')
+        #STOCKS
         FocusButton:
             focus: True
             background_color: C('#4617B4')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -277,7 +314,7 @@ bxL:
 
                 Image:
                     source: './images/reports7.gif'
-                    anim_delay: 0.05
+                    anim_delay: -1 if self.parent.parent.disabled else 0.05
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2
@@ -286,9 +323,13 @@ bxL:
                     font_size: 12
                     text_size: self.size
                     text:  root.getText('rpotst')
+
+        #ANNUAL
         FocusButton:
             focus: True
             background_color: C('#00c13F')
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -306,6 +347,7 @@ bxL:
                     font_size: 12
                     text_size: self.size
                     text:  root.getText('rpotan')
+        #SETTINGS
         FocusButton:
             nextScreen: 'home'
             transition: WipeTransition()
@@ -314,6 +356,8 @@ bxL:
             on_release:
                 app.root.transition = self.transition
                 app.root.current = 'home'
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
             StackLayout:
                 pos: self.parent.pos
                 size: self.parent.size
@@ -323,7 +367,7 @@ bxL:
 
                 Image:
                     source: './images/cubes.gif'
-                    anim_delay: 0.05
+                    anim_delay: -1 if self.parent.parent.disabled else 0.05
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2

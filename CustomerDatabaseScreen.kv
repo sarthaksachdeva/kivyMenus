@@ -1,0 +1,148 @@
+#:import C kivy.utils.get_color_from_hex
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+<TextInputPopup>:
+    firstWidget: txtinput
+    title: "Edit Entry"
+    size_hint: None, None
+    size: 400, 400
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: "vertical"
+        FocusTextInput:
+            id: txtinput
+            text: root.obj_text
+
+        FocusPopUpButton:
+            buttonId: 'Save'
+            size_hint: 1, 0.2
+            text: "Save Changes"
+            background_color: C('#19b74e')
+            font_name: 'Helsinki'
+            on_release:
+                root.obj.update_changes(txtinput.text)
+                root.dismiss()
+        FocusPopUpButton:
+            buttonId: 'cancel'
+            size_hint: 1, 0.2
+            text: "Cancel Changes"
+            background_color: C('#E74C3C')
+            font_name: 'Helsinki'
+            on_release: root.dismiss()
+
+
+customerDatabase:
+    navBar: _navbar
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            canvas.before:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: './images/Background24.jpg'
+            size_hint: 1, 1
+            orientation: 'vertical'
+
+            #V SPACING LABEL
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.14
+
+            # DATA BASE  SECTION
+            AnchorLayout:
+                size_hint: 1,0.7
+                anchor_x: 'center'
+                anchor_y: 'top'
+
+                BoxLayout:
+                    size_hint: 0.85,1
+                    orientation: "vertical"
+
+                    GridLayout:
+                        size_hint: 1, None
+                        size_hint_y: None
+                        height: 25
+                        cols: 6
+
+                        Label:
+                            text: "ID"
+                        Label:
+                            text: "User Name"
+                        Label:
+                            text: "User Name(Local)"
+                        Label:
+                            text: "Address"
+                        Label:
+                            text: "Telephone1"
+                        Label:
+                            text: "Telephone2"
+
+                    BoxLayout:
+                        RecycleView:
+                            viewclass: 'SelectableButton'
+                            data: [{'text': str(x)} for x in root.data_items]
+                            SelectableRecycleGridLayout:
+                                nonSelectable: [0]
+                                tableId: "CustomerDb"
+                                cols: 6
+                                default_size: None, dp(26)
+                                default_size_hint: 1, None
+                                size_hint_y: None
+                                height: self.minimum_height
+                                orientation: 'vertical'
+
+
+            #V SPACING LABEL
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.03
+
+            # PRINT BUTTONS
+            BoxLayout:
+                size_hint: 1,0.1
+                orientation: 'horizontal'
+
+                # H SPACER BEFORE BUTTONS
+                Label:
+                    size_hint: 0.4, 1
+
+                #SAVE BUTTON
+                FocusButton2:
+                    size_hint: 0.2,1
+                    background_color: (0,0,0,0)
+                    nextScreen: 'mainMenu'
+                    transition: FallOutTransition()
+                    functionCall:
+                        partial(app.sendDataEventToPrinter, 2, 1)
+                    on_release:
+                        app.root.transition = self.transition
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'mainMenu' if  self.functionCall() else 'firstCollectionMenu'
+                    Image:
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                        source: './images/printButton2.png'
+
+                # H SPACER AFTER BUTTONS
+                Label:
+                    size_hint: 0.4, 1
+
+            #V SPACING LABEL
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.03
+
+
+
+
+
+
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'top'
+        id: _navbar
+

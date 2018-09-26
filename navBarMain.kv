@@ -1,5 +1,19 @@
 #:import C kivy.utils.get_color_from_hex
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
 navBar:
+    aboutDD: aboutDD.__self__
+    reportDD: reportDD.__self__
+    configDD: configDD.__self__
+    operationDD: operationDD.__self__
+    burgerDD: burgerDD.__self__
+    configSubDD: configSubDD.__self__
+    operationSubDD: operationSubDD.__self__
+    reportSubDD: reportSubDD.__self__
+    inboundSubDD: inboundSubDD.__self__
+    outboundSubDD: outboundSubDD.__self__
+    tariffSubDD: tariffSubDD.__self__
+    deviceSubDD: deviceSubDD.__self__
+
     canvas.before:
         Color:
             rgba: .24, .65, .94, .7
@@ -40,18 +54,137 @@ navBar:
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('opertn')
+            on_release: operationSubDD.open(self)
+            attachedTo: operationSubDD
             size_hint_y: None
             height: 44
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('report')
+            on_release: reportSubDD.open(self)
+            attachedTo: reportSubDD
             size_hint_y: None
             height: 44
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('config')
+            on_release: configSubDD.open(self)
+            attachedTo: configSubDD
             size_hint_y: None
             height: 44
+        FocusButton3:
+            nextScreen: 'SignUp'
+            transition: WipeTransition()
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: 'Sign Up'
+            on_create:
+                self.disabled = False if app.isUserAdmin() else True
+            on_release:
+                burgerDD.dismiss()
+                app.root.transition = self.transition
+                app.root.transition.direction = 'right'
+                app.root.current = 'SignUp'
+            size_hint_y: None
+            height: 44
+        FocusButton3:
+            nextScreen: 'home'
+            transition: WipeTransition()
+            functionCall: app.logOut
+            background_color: (0.0, 0.0, 0.0, 0)
+            text: 'Log Out'
+            on_release:
+                burgerDD.dismiss()
+                app.root.transition = self.transition
+                app.root.transition.direction = 'right'
+                app.root.current = 'home' if self.functionCall()  else 'mainMenu'
+            size_hint_y: None
+            height: 44
+
+        CustomDropDown:
+            id: configSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('custmr')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('device')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('tariff')
+                size_hint_y: None
+                height: 44
+
+        CustomDropDown:
+            id: reportSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('inboun')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('outbnd')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('stocks')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('paymen')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('tchart')
+                size_hint_y: None
+                height: 44
+
+        CustomDropDown:
+            id: operationSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('inbndl')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('outblc')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('outbun')
+                size_hint_y: None
+                height: 44
+
 
     #WIDGET 2
     FocusButton3:
@@ -137,13 +270,70 @@ navBar:
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('inboun')
+            attachedTo: inboundSubDD
+            on_release: inboundSubDD.open(self)
             size_hint_y: None
             height: 44
+        CustomDropDown:
+            id: inboundSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Daily'
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Monthly'
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Annual'
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Customer'
+                size_hint_y: None
+                height: 44
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('outbnd')
+            attachedTo: outboundSubDD
+            on_release: outboundSubDD.open(self)
             size_hint_y: None
             height: 44
+        CustomDropDown:
+            id: outboundSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Daily'
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Monthly'
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Annual'
+                size_hint_y: None
+                height: 44
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('stocks')
@@ -200,13 +390,56 @@ navBar:
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('device')
+            attachedTo: deviceSubDD
+            on_release: deviceSubDD.open(self)
             size_hint_y: None
             height: 44
+        CustomDropDown:
+            id: deviceSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Anchor&Theme'
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'Components'
+                size_hint_y: None
+                height: 44
+
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('tariff')
+            attachedTo: tariffSubDD
+            on_release: tariffSubDD.open(self)
             size_hint_y: None
             height: 44
+        CustomDropDown:
+            id: tariffSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'General'
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: 'FAT only'
+                size_hint_y: None
+                height: 44
 
 
     #WIDGET 5
@@ -267,3 +500,10 @@ navBar:
         on_parent: configDD.dismiss()
         on_parent: operationDD.dismiss()
         on_parent: burgerDD.dismiss()
+        on_parent: configSubDD.dismiss()
+        on_parent: operationSubDD.dismiss()
+        on_parent: reportSubDD.dismiss()
+        on_parent: inboundSubDD.dismiss()
+        on_parent: outboundSubDD.dismiss()
+        on_parent: tariffSubDD.dismiss()
+        on_parent: deviceSubDD.dismiss()

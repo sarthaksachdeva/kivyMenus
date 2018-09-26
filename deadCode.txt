@@ -73,6 +73,30 @@
             size:self.parent.width + 10 ,self.parent.height + 10
 
 
+#handle rounded button type objects
+class ImageButton(FocusButton2,FocusBehavior):
+
+    def on_press(self):
+        #todo correct this logic
+        if(self.text == 'Discard'):
+            with self.canvas.after:
+                Color(rgba=(1, 0, 0, 0.3))
+                Rectangle(pos=self.pos, size=self.size)
+
+        elif(self.text == 'Save'):
+                with self.canvas.after:
+                    Color(rgba=(0, 0, 1, 0.3))
+                    Rectangle(pos=self.pos, size=self.size)
+
+        elif(self.text == 'Print'):
+                with self.canvas.after:
+                    Color(rgba=(0, 1, 0, 0.3))
+                    Rectangle(pos=self.pos, size=self.size)
+
+    def on_release(self):
+        self.canvas.after.clear()
+
+
 
        #WIDGET 1
     FocusButton3:
@@ -114,3 +138,131 @@
             text: root.getText('config')
             size_hint_y: None
             height: 44
+
+
+    # @Description
+    #     check if editable , if yes ok , else pass the focus to the next one
+    # def on_focused(self, instance, value, *largs):
+    #     isEditable = True
+    #
+    #     for i in range(len(self.parent.nonSelectable)):
+    #         isEditable = isEditable and (((self.index - self.parent.nonSelectable[i]) % self.parent.cols) != 0)
+    #     if (isEditable):
+    #         return super(SelectableButton, self).on_focused(instance, value, *largs)
+    #     else:
+    #         nextFocusedWidget = self.get_focus_next()
+    #         self.is_focusable = False
+    #         nextFocusedWidget.focus = True
+
+
+
+
+
+#insert in db device users
+    def insertDeviceUserInDb(self, entry):
+        retVal = False  # if name  is not admin
+        if(self.checkIfDeviceUserSchema(entry)):
+            if (entry["name"].lower() != "admin"):
+                existingUsers = self.m_userCollection.find({"name": entry["name"]})
+                # if multiple entries with same don't exists , insert entry
+                if (existingUsers.count() <= 0):
+                    self.m_userCollection.insert_one(entry)
+                    retVal = True
+                # else check if user with same name doesn't have same password too.
+                else:
+                    isPasswordValid = True
+                    for user in existingUsers:
+                        if (user["password"] == entry["password"]):
+                            print("Failed entry to Database coz same pass word for user name exists, enter different user name , password")
+                            isPasswordValid = False
+                            break
+
+                    # if user with same password don't exist.
+                    if (isPasswordValid == True):
+                        self.m_userCollection.insert_one(entry)
+                        retVal = True
+            else:
+                print("user name is admin , not correct")
+
+            return retVal
+
+
+
+
+
+
+
+
+#sign up and forget password on home page
+            #AnchorLayout:
+                #anchor_x: 'right'
+                #anchor_y: 'center'
+                #size_hint: 1, 0.07
+                #BoxLayout:
+                    #padding: 0
+                    #spacing: 0
+                    #orientation: 'horizontal'
+                    #size_hint: 0.55,1
+                    #FocusButton2:
+                       # nextScreen: 'SignUp'
+                        #transition: WipeTransition()
+                        #id: signup
+                        #size_hint: 0.38, 1
+                        #background_color: (0.0, 0.0, 0.0, 0)
+                        #font_size: 14
+                        #text: 'Sign up?'
+                        #focus: True
+                        #on_release:
+                            #app.root.transition = self.transition
+                            #app.root.transition.direction = 'right'
+                            #app.root.current = 'SignUp'
+
+                    #FocusButton2:
+                        #id: flogin
+                        #size_hint: 0.62, 1
+                        #background_color: (0.0, 0.0, 0.0, 0)
+                        #font_size: 14
+                        #text: 'forget password?'
+                        #focus: True
+
+#bind keyboard to button/widget
+
+# by default focus widgets already have keyboard bound to them.
+class PopUpButton(FocusWithColor, Button):
+    popup = ObjectProperty(None)
+
+    def keyboard_on_key_down(self, window, keycode, text, modifiers):
+        if super(FocusWithColor, self).keyboard_on_key_down(window, keycode,
+                                                            text, modifiers):
+            return True
+
+        if (self.popup is not None):
+            self.popup.dismiss()
+        return True
+
+    # creates and opens after sign up
+    def createPopUpForSign(self, text, calleeWidget, newUser):
+        box = BoxLayout(orientation='vertical')
+        lab = Label(text=text)
+        buttonOk = PopUpButton(text="YES", background_color=get_color_from_hex('#95A5A6'))
+        buttonCancel = PopUpButton(text="NO", background_color=get_color_from_hex('#95A5A6'))
+        box2 = BoxLayout(orientation='horizontal')
+        box2.add_widget(buttonOk)
+        box2.add_widget(buttonCancel)
+        box.add_widget(lab)
+        box.add_widget(box2)
+        popup = Popup(title='',
+                      content=box,
+                      size_hint=(0.6, 0.2))
+        buttonOk.focus = True
+        calleeWidget.focus = False
+        buttonOk.bind(on_press=partial(self.changeCurrUserToNewAccountCreated, newUser, popup))
+        buttonCancel.bind(on_press=popup.dismiss)
+        buttonOk.popup = popup
+        buttonCancel.popup = popup
+        popup.open()
+
+    # change current user to new user whose account was created
+    def changeCurrUserToNewAccountCreated(self, newUser, popup):
+        self.m_dbHelper.setCurrentDeviceUser(newUser)
+        popup.dismiss()

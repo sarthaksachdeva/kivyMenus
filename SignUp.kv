@@ -1,0 +1,204 @@
+#:import C kivy.utils.get_color_from_hex
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+#: import partial functools.partial
+HomePage:
+    firstFocusWidget: name
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './images/Background101.jpg'
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            padding: 0
+            spacing: 0
+            size_hint: 0.55, 0.8
+            orientation: 'vertical'
+            canvas.before:
+                BorderImage:
+                    pos: self.pos
+                    size: self.size
+                    source: './images/blackBorderImage.png'
+                Color:
+                    rgba: 0.592, 0.718,0.984,1 #background_color: C('#97b7fc')
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # HEADING
+            Button:
+                focus: False
+                font_name: 'Jellee-Roman'
+                background_normal: ''
+                background_color: C('#003f77')
+                padding: 10,10
+                size_hint: 1, 0.15
+                halign: 'center'
+                valign: 'top'
+                font_size: self.height/2
+                text_size: self.size
+                text: 'Sign Up'
+
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
+                BoxLayout:
+                    padding: 0
+                    spacing: 0
+                    size_hint: 0.85, 0.9
+                    orientation: 'vertical'
+
+                    # NAME
+                    StackLayout:
+                        padding: 0
+                        spacing: 0
+                        orientation: 'tb-lr'
+                        size_hint: 1, 0.15
+                        Label:
+                            halign: 'left'
+                            valign: 'middle'
+                            size_hint: 0.6, 0.35
+                            text_size: self.size
+                            font_name:'Helsinki'
+                            text: 'Name *'
+
+                        FocusTextInput:
+                            id: name
+                            size_hint: 1, 0.65
+                            background_color: (212, 216, 213, 0.8)
+                            multiline: False
+
+                    #V SPACER
+                    Label:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        size_hint: 1, 0.02
+
+                    # PASSWORD
+                    StackLayout:
+                        padding: 0
+                        spacing: 0
+                        orientation: 'tb-lr'
+                        size_hint: 1, 0.15
+                        Label:
+                            halign: 'left'
+                            valign: 'middle'
+                            size_hint: 0.6, 0.35
+                            text_size: self.size
+                            font_name:'Helsinki'
+                            text: 'Password *'
+
+                        FocusTextInput:
+                            id: passw
+                            size_hint: 1, 0.65
+                            background_color: (212, 216, 213, 0.8)
+                            multiline: False
+                            password: True
+                            allow_copy: False
+
+                    #V SPACER
+                    Label:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        size_hint: 1, 0.02
+
+                    # CONFIRM PASSWORD
+                    StackLayout:
+                        padding: 0
+                        spacing: 0
+                        orientation: 'tb-lr'
+                        size_hint: 1, 0.15
+                        Label:
+                            halign: 'left'
+                            valign: 'middle'
+                            size_hint: 0.6, 0.35
+                            text_size: self.size
+                            font_name:'Helsinki'
+                            text: 'Confirm Password *'
+
+                        FocusTextInput:
+                            id: confirmpassw
+                            size_hint: 1, 0.65
+                            background_color: (212, 216, 213, 0.8)
+                            multiline: False
+                            password: True
+                            allow_copy: False
+
+                    #V SPACER
+                    Label:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        size_hint: 1, 0.02
+
+                    # ROLE
+                    StackLayout:
+                        padding: 0
+                        spacing: 0
+                        orientation: 'tb-lr'
+                        size_hint: 1, 0.15
+                        Label:
+                            halign: 'left'
+                            valign: 'middle'
+                            size_hint: 0.6, 0.35
+                            text_size: self.size
+                            font_name:'Helsinki'
+                            text: 'Role'
+
+                        FocusTextInput:
+                            id: role
+                            size_hint: 1, 0.65
+                            background_color: (212, 216, 213, 0.8)
+                            multiline: False
+                            password: True
+                            allow_copy: True
+
+                    #V SPACER
+                    Label:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        size_hint: 1, 0.12
+
+                    BoxLayout:
+                        padding: 0
+                        spacing: 0
+                        orientation: 'horizontal'
+                        size_hint: 1, 0.12
+                        FocusButton:
+                            nextScreen: 'mainMenu'
+                            transition: WipeTransition()
+                            functionCall: partial(app.signUp, name, passw, confirmpassw, role, self)
+                            id: signup
+                            size_hint: 0.45, 1
+                            background_color: C('#19b74e')
+                            on_release:
+                                app.root.transition = self.transition
+                                app.root.transition.direction = 'right'
+                                app.root.current = 'mainMenu' if  self.functionCall() else 'SignUp'
+                            font_name:'Helsinki'
+                            text: 'Sign Up'
+
+                        #H SPACER
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.1, 1
+
+                        FocusButton:
+                            nextScreen: 'mainMenu'
+                            transition: WipeTransition()
+                            functionCall: partial(app.clearAddUserData, name, passw, confirmpassw, role)
+                            id: cancel
+                            size_hint:  0.45, 1
+                            background_color: C('#E74C3C')
+                            on_release:
+                                app.root.transition = self.transition
+                                app.root.transition.direction = 'right'
+                                app.root.current = 'mainMenu' if self.functionCall() else 'SignUp'
+
+                            font_name:'Helsinki'
+                            text: 'Cancel'
+
+                    #V SPACER
+                    Label:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        size_hint: 1, 0.1
+
+

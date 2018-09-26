@@ -1,5 +1,6 @@
 #:import C kivy.utils.get_color_from_hex
 #:import WipeTransition kivy.uix.screenmanager.WipeTransition
+#: import partial functools.partial
 HomePage:
     firstFocusWidget: name
     canvas.before:
@@ -84,13 +85,14 @@ HomePage:
             FocusButton:
                 nextScreen: 'mainMenu'
                 transition: WipeTransition()
+                functionCall: partial(app.login, nameWidget = name, passwordWidget = passw, calleeWidget = self)
                 id: login
                 size_hint: 1, 0.15
                 background_color: C('#19b74e')
                 on_release:
                     app.root.transition = self.transition
                     app.root.transition.direction = 'right'
-                    app.root.current = 'mainMenu'
+                    app.root.current = 'mainMenu' if  self.functionCall() else 'home'
 
                 font_size: 14
                 text: 'Login'
@@ -100,28 +102,6 @@ HomePage:
                 background_color: (0.0, 0.0, 0.0, 0)
                 size_hint: 1, 0.02
 
-
-            AnchorLayout:
-                anchor_x: 'right'
-                anchor_y: 'center'
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
                 size_hint: 1, 0.07
-                BoxLayout:
-                    padding: 0
-                    spacing: 0
-                    orientation: 'horizontal'
-                    size_hint: 0.55,1
-                    FocusButton2:
-                        id: signup
-                        size_hint: 0.38, 1
-                        background_color: (0.0, 0.0, 0.0, 0)
-                        font_size: 14
-                        text: 'Sign up?'
-                        focus: True
-
-                    FocusButton2:
-                        id: flogin
-                        size_hint: 0.62, 1
-                        background_color: (0.0, 0.0, 0.0, 0)
-                        font_size: 14
-                        text: 'forget password?'
-                        focus: True

@@ -1,6 +1,9 @@
 #:import C kivy.utils.get_color_from_hex
 #:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
 firstCollectionMenu:
+    dropdown1: dropdown1.__self__
+    dropdown3: dropdown3.__self__
+    dropdownT: dropdownT.__self__
     navBar: _navbar
     firstFocusWidget: Mode
 
@@ -59,7 +62,7 @@ firstCollectionMenu:
                             halign: 'right'
                             valign: 'middle'
                             text_size: self.size
-                            text: 'Mode'
+                            text: manual.text
                         Image:
                             source: './images/dropDown.png'
                             size_hint:0.5,0.9
@@ -77,6 +80,7 @@ firstCollectionMenu:
                             source: './images/navbarBackground.jpg'
 
                     FocusButton2:
+                        id: manual
                         background_color: (0.0, 0.0, 0.0, 0)
                         text: 'Manual'
                         size_hint_y: None
@@ -139,7 +143,7 @@ firstCollectionMenu:
                             halign: 'right'
                             valign: 'middle'
                             text_size: self.size
-                            text: 'Session'
+                            text: morning.text
                         Image:
                             source: './images/dropDown.png'
                             size_hint:0.5,0.9
@@ -156,6 +160,7 @@ firstCollectionMenu:
                             source: './images/navbarBackground.jpg'
 
                     FocusButton2:
+                        id: morning
                         background_color: (0.0, 0.0, 0.0, 0)
                         text: 'Morning'
                         size_hint_y: None
@@ -223,7 +228,8 @@ firstCollectionMenu:
                             text: 'ID:'
                             font_name: 'Jellee-Roman'
                         #INPUT
-                        FocusTextInput:
+                        FloatTextInput:
+                            id: customerId
                             font_name: 'Jellee-Roman'
                             #To draw A line and transparent bg
                             #canvas.before:
@@ -233,6 +239,8 @@ firstCollectionMenu:
                             size_hint: 0.2, 0.5
                             focus: True
                             multiline: False
+                            on_text_edit:
+                                _,customerName.text = app.getCustomerAndCustomerNameById(self.text)
 
                         #SPACING LABEL
                         Label:
@@ -247,12 +255,14 @@ firstCollectionMenu:
 
                         #INPUT
                         FocusTextInput:
+                            id: customerName
                             padding_y: 0
                             font_name: 'Jellee-Roman'
                             size_hint: 0.3, 0.5
                             focus: True
                             multiline: False
                             background_color: (212, 216, 213, 0.8)
+                            readonly: True
 
                         #SPACING LABEL
                         Label:
@@ -324,6 +334,7 @@ firstCollectionMenu:
                                 padding: 10,0
                             #INPUT
                             FocusTextInput:
+                                id: milkTypeInput
                                 padding_y: 0
                                 font_name: 'Jellee-Roman'
                                 size_hint: 0.2, 0.7
@@ -365,7 +376,7 @@ firstCollectionMenu:
                                         halign: 'right'
                                         valign: 'middle'
                                         text_size: self.size
-                                        text: 'Tariff'
+                                        text: tariff1.text
                                     Image:
                                         source: './images/dropDown.png'
                                         size_hint:0.5,0.9
@@ -383,6 +394,7 @@ firstCollectionMenu:
                                         source: './images/navbarBackground.jpg'
 
                                 FocusButton2:
+                                    id: tariff1
                                     font_name: 'Jellee-Roman'
                                     background_color: (0.0, 0.0, 0.0, 0)
                                     text: 'Tariff1'
@@ -420,6 +432,7 @@ firstCollectionMenu:
                                 text: 'Weight:'
                             #INPUT
                             FloatTextInput:
+                                id: weightInput
                                 font_name: 'Jellee-Roman'
                                 size_hint: 0.15, 0.7
                                 focus: True
@@ -445,6 +458,7 @@ firstCollectionMenu:
 
                             #INPUT
                             FloatTextInput:
+                                id: fatInput
                                 font_name: 'Jellee-Roman'
                                 size_hint: 0.15, 0.7
                                 focus: True
@@ -520,6 +534,7 @@ firstCollectionMenu:
                                 size_hint: 0.05, 1
                             #INPUT
                             FloatTextInput:
+                                id: amountInput
                                 font_name: 'Jellee-Roman'
                                 size_hint: 0.4, 0.7
                                 focus: True
@@ -553,6 +568,16 @@ firstCollectionMenu:
                 FocusButton2:
                     size_hint: 0.2,1
                     background_color: (0,0,0,0)
+                    nextScreen: 'mainMenu'
+                    transition: FallOutTransition()
+                    functionCall:
+                        partial(app.addCustomerMilkCollectionData, customerId, customerName, btn1, btn2, milkTypeInput,
+                        btnT, weightInput, fatInput, amountInput, self)
+                    on_release:
+                        trashCan._coreimage.anim_reset(True)
+                        app.root.transition = self.transition
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'mainMenu' if  self.functionCall() else 'firstCollectionMenu'
                     Image:
                         size: self.parent.size
                         x: self.parent.x
@@ -564,9 +589,17 @@ firstCollectionMenu:
                     size_hint: 0.05, 1
 
                 #PRINT BUTTON
-                ImageButton:
+                FocusButton2:
                     size_hint: 0.2,1
                     background_color: (0,0,0,0)
+                    nextScreen: 'mainMenu'
+                    transition: FallOutTransition()
+                    functionCall:
+                        partial(app.sendDataEventToPrinter, 3, 1)
+                    on_release:
+                        app.root.transition = self.transition
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'mainMenu' if  self.functionCall() else 'CustomerDb'
                     Image:
                         size: self.parent.size
                         x: self.parent.x
@@ -581,8 +614,16 @@ firstCollectionMenu:
                 FocusButton2:
                     size_hint: 0.2,1
                     background_color: (0,0,0,0)
+                    nextScreen: 'mainMenu'
+                    transition: FallOutTransition()
+                    functionCall:
+                        partial(app.clearCustomerMilkCollectionData, customerId, customerName, milkTypeInput,
+                        weightInput, fatInput, amountInput)
                     on_release:
                         trashCan._coreimage.anim_reset(True)
+                        app.root.transition = self.transition
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'mainMenu' if  self.functionCall() else 'firstCollectionMenu'
 
                     Image:
                         id: trashCan

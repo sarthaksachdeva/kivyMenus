@@ -1,0 +1,262 @@
+#:import C kivy.utils.get_color_from_hex
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+#: import partial functools.partial
+firstCollectionMenu:
+    navBar: _navbar
+    firstFocusWidget: nameInput
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            canvas.before:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: './images/Background23.jpg'
+            size_hint: 1, 1
+            orientation: 'vertical'
+
+            #V SPACING LABEL
+            Label:
+                background_color: (0.0, 0.0, 0.0, 0)
+                size_hint: 1, 0.14
+
+
+            # NAME ID SECTION
+            AnchorLayout:
+                size_hint: 1,0.62
+                anchor_x: 'center'
+                anchor_y: 'top'
+
+                BoxLayout:
+                    size_hint: 0.85,1
+                    canvas.before:
+                        BorderImage:
+                            pos: self.pos
+                            size: self.size
+                            source: './images/blackBorderImage.png'
+                        Color:
+                            rgba: 0.592, 0.718,0.984,1 #background_color: C('#97b7fc')
+                        #coz color jayega kisme if you don't add this
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                    orientation: 'vertical'
+
+                    #HEADING CUSTOMER
+                    Button:
+                        font_name: 'Jellee-Roman'
+                        background_normal: ''
+                        background_color: C('#003f77')
+                        padding: 10,10
+                        size_hint: 1, 0.1
+                        halign: 'left'
+                        valign: 'top'
+                        font_size: self.height/2
+                        text_size: self.size
+                        text: 'Customer'
+                    #ID
+                    BoxLayout:
+                        size_hint: 1, 0.12
+                        orientation: 'horizontal'
+
+                        #H SPACING LABEL BEFORE ID
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.3, 1
+                        #ID
+                        Label:
+                            size_hint: 0.1, 0.5
+                            text: 'ID:'
+                            font_name: 'Jellee-Roman'
+                        #INPUT
+                        FocusTextInput:
+                            id: customerIdInput
+                            disabled: True
+                            on_create:
+                                self.text = str(app.getNumberOfCustomers() + 1)
+                            font_name: 'Jellee-Roman'
+                            background_color: (212, 216, 213, 0.8)
+                            size_hint: 0.2, 0.5
+                            focus: True
+                            multiline: False
+
+                        #H SPACING LABEL AFTER INPUT
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.3, 1
+                    #NAME
+                    BoxLayout:
+                        size_hint: 1, 0.12
+                        orientation: 'horizontal'
+
+                        #NAME
+                        Label:
+                            size_hint: 0.3, 0.5
+                            text: 'Name:'
+                            font_name: 'Jellee-Roman'
+
+                        #INPUT
+                        FocusTextInput:
+                            id: nameInput
+                            padding_y: 0
+                            font_name: 'Jellee-Roman'
+                            size_hint: 0.5, 0.5
+                            focus: True
+                            multiline: False
+                            background_color: (212, 216, 213, 0.8)
+
+                        #SPACING LABEL
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.2, 1
+
+                    #NAME(local)
+                    BoxLayout:
+                        size_hint: 1, 0.12
+                        orientation: 'horizontal'
+
+                        #NAME(LOCAL)
+                        Label:
+                            size_hint: 0.3, 0.5
+                            text: 'Name(Local):'
+                            font_name: 'Jellee-Roman'
+
+                        #INPUT
+                        FocusTextInput:
+                            id: localNameInput
+                            padding_y: 0
+                            font_name: 'Jellee-Roman'
+                            size_hint: 0.5, 0.5
+                            focus: True
+                            multiline: False
+                            background_color: (212, 216, 213, 0.8)
+
+                        #SPACING LABEL
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.2, 1
+                    #ADDRESS
+                    BoxLayout:
+                        size_hint: 1, 0.12
+                        orientation: 'horizontal'
+
+                        #ADRESS
+                        Label:
+                            size_hint: 0.3, 0.5
+                            text: 'Address:'
+                            font_name: 'Jellee-Roman'
+
+                        #INPUT
+                        FocusTextInput:
+                            id: addressInput
+                            padding_y: 0
+                            font_name: 'Jellee-Roman'
+                            size_hint: 0.5, 0.5
+                            focus: True
+                            multiline: False
+                            background_color: (212, 216, 213, 0.8)
+
+                        #SPACING LABEL
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.2, 1
+                    #TELEPHONE
+                    BoxLayout:
+                        size_hint: 1, 0.12
+                        orientation: 'horizontal'
+
+                        #TELEPHONE
+                        Label:
+                            size_hint: 0.3, 0.5
+                            text: 'TelePhone:'
+                            font_name: 'Jellee-Roman'
+
+                        #INPUT
+                        FocusTextInput:
+                            id: telephoneInput
+                            padding_y: 0
+                            font_name: 'Jellee-Roman'
+                            size_hint: 0.5, 0.5
+                            focus: True
+                            multiline: False
+                            background_color: (212, 216, 213, 0.8)
+
+                        #SPACING LABEL
+                        Label:
+                            background_color: (0.0, 0.0, 0.0, 0)
+                            size_hint: 0.2, 1
+
+                    #V SPACING LABEL
+                    Label:
+                        background_color: (0.0, 0.0, 0.0, 0)
+                        size_hint: 1, 0.02
+
+            # V SPACER BW INPUT AND BUTTONS
+            Label:
+                size_hint: 1, 0.07
+
+            # PRINT, SAVE BUTTONS
+            BoxLayout:
+                size_hint: 1,0.1
+                orientation: 'horizontal'
+
+                # H SPACER BEFORE BUTTONS
+                Label:
+                    size_hint: 0.2, 1
+
+                #SAVE BUTTON
+                FocusButton2:
+                    size_hint: 0.2,1
+                    background_color: (0,0,0,0)
+                    nextScreen: 'mainMenu'
+                    transition: FallOutTransition()
+                    functionCall: partial(app.addNewCustomer, customerIdInput, nameInput, localNameInput, addressInput, telephoneInput, self)
+                    Image:
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                        source: './images/saveButton3.png'
+
+                # H SPACER BW BUTTONS
+                Label:
+                    size_hint: 0.2, 1
+
+                #DISCARD BUTTON
+                FocusButton2:
+                    size_hint: 0.2,1
+                    background_color: (0,0,0,0)
+                    nextScreen: 'mainMenu'
+                    transition: FallOutTransition()
+                    functionCall: partial(app.clearAddCustomerData, nameInput, localNameInput, addressInput, telephoneInput)
+                    on_release:
+                        trashCan._coreimage.anim_reset(True)
+                        app.root.transition = self.transition
+                        app.root.transition.direction = 'right'
+                        app.root.current = 'mainMenu' if  self.functionCall() else 'CustomerMenu'
+
+
+                    Image:
+                        id: trashCan
+                        allow_stretch: True
+                        anim_delay:0.05
+                        anim_loop: 1
+                        size: self.parent.size
+                        x: self.parent.x
+                        y: self.parent.y
+                        source: './images/discardButton5.png'
+
+                # H SPACER AFTER BUTTONS
+                Label:
+                    size_hint: 0.2, 1
+
+            # V SPACER AFTER BUTTON
+            Label:
+                size_hint: 1, 0.07
+
+
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'top'
+        id: _navbar

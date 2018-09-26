@@ -1,6 +1,10 @@
 #:import C kivy.utils.get_color_from_hex
 #:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
 navBar:
+    burgerDD: burgerDD.__self__
+    configSubDD: configSubDD.__self__
+    operationSubDD: operationSubDD.__self__
+    reportSubDD: reportSubDD.__self__
     canvas.before:
         Color:
             rgba: .24, .65, .94, .7
@@ -39,24 +43,115 @@ navBar:
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('opertn')
+            on_release: operationSubDD.open(self)
+            attachedTo: operationSubDD
             size_hint_y: None
             height: 44
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('report')
+            on_release: reportSubDD.open(self)
+            attachedTo: reportSubDD
             size_hint_y: None
+
             height: 44
         FocusButton3:
             background_color: (0.0, 0.0, 0.0, 0)
             text: root.getText('config')
+            on_release: configSubDD.open(self)
+            attachedTo: configSubDD
             size_hint_y: None
             height: 44
 
-    #Label:
-        #background_color: (0.0, 0.0, 0.0, 0)
-        #size_hint:0.1,1
+        CustomDropDown:
+            id: configSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('custmr')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('device')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('tariff')
+                size_hint_y: None
+                height: 44
+
+        CustomDropDown:
+            id: reportSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('inboun')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('outbnd')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('stocks')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('paymen')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('tchart')
+                size_hint_y: None
+                height: 44
+
+        CustomDropDown:
+            id: operationSubDD
+            onSide: True
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 0.9
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('inbndl')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('outblc')
+                size_hint_y: None
+                height: 44
+            FocusButton3:
+                background_color: (0.0, 0.0, 0.0, 0)
+                text: root.getText('outbun')
+                size_hint_y: None
+                height: 44
+
+
     #WIDGET 2
-    FocusButton3:
+    Button:
+        focus: False
         size_hint: 0.46, 1
         background_color: (0.0, 0.0, 0.0, 0)
         id: Heading
@@ -138,3 +233,6 @@ navBar:
             background_color: (0.0, 0.0, 0.0, 0)
             size_hint: 0.00000000000001,1
             on_parent: burgerDD.dismiss()
+            on_parent: configSubDD.dismiss()
+            on_parent: reportSubDD.dismiss()
+            on_parent: operationSubDD.dismiss()
