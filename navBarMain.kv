@@ -29,17 +29,17 @@ navBar:
 
     #WIDGET 1
     FocusButton3:
+        attachedGif: burgerGif
+        animDelay: 0.05
         background_color: (0.0, 0.0, 0.0, 0)
         id: burger
-        on_press: burgerGif._coreimage.anim_reset(True)
         on_release: burgerDD.open(self)
         attachedTo: burgerDD
         Image:
             id: burgerGif
             source: './images/burgerIcon2Mod.gif'
             allow_stretch: True
-            anim_delay:0.05
-            anim_loop: 1
+            anim_delay: -1
             y: self.parent.y
             x: self.parent.x
             size:self.parent.width + 10 ,self.parent.height + 10
@@ -84,6 +84,7 @@ navBar:
                 app.root.transition = self.transition
                 app.root.transition.direction = 'right'
                 app.root.current = 'SignUp'
+                self.focus = False
             size_hint_y: None
             height: 44
         FocusButton3:
@@ -97,6 +98,7 @@ navBar:
                 app.root.transition = self.transition
                 app.root.transition.direction = 'right'
                 app.root.current = 'home' if self.functionCall()  else 'mainMenu'
+                self.focus = False
             size_hint_y: None
             height: 44
 

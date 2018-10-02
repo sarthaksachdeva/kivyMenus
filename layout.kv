@@ -39,6 +39,7 @@ bxL:
             on_release:
                 app.root.transition = self.transition
                 app.root.current = 'firstCollectionMenu'
+                self.focus = False
             background_color: C('#2ECC71')
             StackLayout:
                 pos: self.parent.pos
@@ -65,6 +66,7 @@ bxL:
             on_release:
                 app.root.transition = self.transition
                 app.root.current = 'CustomerMenu'
+                self.focus = False
             background_color: C('#1ABC9C')
             StackLayout:
                 pos: self.parent.pos
@@ -160,6 +162,7 @@ bxL:
             on_release:
                 app.root.transition = self.transition
                 app.root.current = 'CustomerDb'
+                self.focus = False
             background_color: C('#95A5A6')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -181,7 +184,8 @@ bxL:
                     text_size: self.size
                     text:  root.getText('rpinct')
         FocusButton:
-            focus: True
+            attachedGif: reportsImg
+            animDelay: 0.08
             background_color: C('#3498DB')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -193,8 +197,9 @@ bxL:
                 orientation: 'tb-lr'
 
                 Image:
+                    id: reportsImg
                     source: './images/reports8.gif'
-                    anim_delay:-1 if self.parent.parent.disabled else 0.08
+                    anim_delay:-1
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2
@@ -230,9 +235,11 @@ bxL:
         spacing: 5
         orientation: 'horizontal'
         size_hint: 1,0.25
+
         #CUSTOMER
         FocusButton:
-            focus: True
+            attachedGif: customerImg
+            animDelay: 0.02
             background_color: C('#00D8cc')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -244,8 +251,9 @@ bxL:
                 orientation: 'tb-lr'
 
                 Image:
+                    id: customerImg
                     source: './images/reports9.gif'
-                    anim_delay: -1 if self.parent.parent.disabled else 0.02
+                    anim_delay: -1
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2
@@ -301,6 +309,8 @@ bxL:
                     text:  root.getText('rpotan')
         #STOCKS
         FocusButton:
+            attachedGif: stockImg
+            animDelay: 0.05
             focus: True
             background_color: C('#4617B4')
             on_create:
@@ -313,8 +323,9 @@ bxL:
                 orientation: 'tb-lr'
 
                 Image:
+                    id: stockImg
                     source: './images/reports7.gif'
-                    anim_delay: -1 if self.parent.parent.disabled else 0.05
+                    anim_delay: -1
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2
@@ -351,11 +362,13 @@ bxL:
         FocusButton:
             nextScreen: 'home'
             transition: WipeTransition()
-            focus: True
+            attachedGif: cubeImg
+            animDelay: 0.05
             background_color: C('#000000')
             on_release:
                 app.root.transition = self.transition
                 app.root.current = 'home'
+                self.focus = False
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
             StackLayout:
@@ -366,8 +379,9 @@ bxL:
                 orientation: 'tb-lr'
 
                 Image:
+                    id: cubeImg
                     source: './images/cubes.gif'
-                    anim_delay: -1 if self.parent.parent.disabled else 0.05
+                    anim_delay: -1
                     size_hint:1,0.8
                 Label:
                     size_hint:1,0.2

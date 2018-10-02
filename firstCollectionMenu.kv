@@ -578,6 +578,7 @@ firstCollectionMenu:
                         app.root.transition = self.transition
                         app.root.transition.direction = 'right'
                         app.root.current = 'mainMenu' if  self.functionCall() else 'firstCollectionMenu'
+                        self.focus = False
                     Image:
                         size: self.parent.size
                         x: self.parent.x
@@ -600,6 +601,7 @@ firstCollectionMenu:
                         app.root.transition = self.transition
                         app.root.transition.direction = 'right'
                         app.root.current = 'mainMenu' if  self.functionCall() else 'CustomerDb'
+                        self.focus = False
                     Image:
                         size: self.parent.size
                         x: self.parent.x
@@ -624,6 +626,7 @@ firstCollectionMenu:
                         app.root.transition = self.transition
                         app.root.transition.direction = 'right'
                         app.root.current = 'mainMenu' if  self.functionCall() else 'firstCollectionMenu'
+                        self.focus = False
 
                     Image:
                         id: trashCan

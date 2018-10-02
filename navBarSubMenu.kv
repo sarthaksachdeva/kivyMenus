@@ -17,18 +17,18 @@ navBar:
 
     #WIDGET 1
     FocusButton3:
+        attachedGif: burgerGif
+        animDelay: 0.05
         size_hint: 0.2, 1
         background_color: (0.0, 0.0, 0.0, 0)
         id: burger
-        on_press: burgerGif._coreimage.anim_reset(True)
         on_release: burgerDD.open(self)
         attachedTo: burgerDD
         Image:
             id: burgerGif
             source: './images/burgerIcon2Mod.gif'
             allow_stretch: True
-            anim_delay:0.05
-            anim_loop: 1
+            anim_delay: -1
             y: self.parent.y
             x: self.parent.x
             size:self.parent.width + 10 ,self.parent.height + 10
@@ -205,6 +205,7 @@ navBar:
         on_release:
             app.root.transition = self.transition
             app.root.current = 'mainMenu'
+            self.focus = False
         Image:
             source: './images/homePage4.png'
             size: self.parent.size

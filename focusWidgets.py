@@ -9,7 +9,7 @@ from kivy.uix.textinput import TextInput
 from kivy.properties import StringProperty
 from kivy.uix.dropdown import DropDown
 from kivy.uix.gridlayout import GridLayout
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, NumericProperty
 from kivy.app import App
 import re
 
@@ -33,6 +33,7 @@ def handleKeyBoardEvents(instance, keycode):
                 app = App.get_running_app()
                 if (instance.transition != None):
                     app.root.transition = instance.transition
+                instance.focus = False
                 app.root.current = instance.nextScreen
 
         #if a drop down is attached open or close it
@@ -90,6 +91,9 @@ def handleKeyBoardEvents(instance, keycode):
 
 class FocusWithColor(FocusBehavior):
 
+
+    attachedGif = ObjectProperty(None)
+    animDelay = NumericProperty(-1)
     def __init__(self, **kwargs):
         super(FocusWithColor, self).__init__(**kwargs)
         self.background_normal = ''
@@ -99,6 +103,11 @@ class FocusWithColor(FocusBehavior):
 
     def on_focused(self, instance, value, *largs):
         if(value):
+            if(self.attachedGif is not None and self.attachedGif._coreimage is not None):
+                self.attachedGif.anim_loop = 1
+                self.attachedGif.anim_delay = self.animDelay
+                self.attachedGif._coreimage.anim_reset(True)
+
             with instance.canvas.before:
                 BorderImage(
                     size=(instance.width + 2, instance.height + 2),
@@ -106,7 +115,12 @@ class FocusWithColor(FocusBehavior):
                     source='./images/borderImage3.jpg',
                     auto_scale='both',
                     group='borderImage')
+
         else:
+            if (self.attachedGif is not None and self.attachedGif._coreimage is not None):
+                self.attachedGif._coreimage._anim_index = 0
+                self.attachedGif._coreimage.anim_reset(True)
+                self.attachedGif._coreimage.anim_reset(False)
             instance.canvas.before.remove_group('borderImage')
 
 # to create dark effect on focus
@@ -128,6 +142,8 @@ class FocusWithColorForTransparentWidgets(FocusBehavior):
             instance.canvas.before.remove_group('borderImage')
 
 class FocusWithColorNavBar(FocusBehavior):
+    attachedGif = ObjectProperty(None)
+    animDelay = NumericProperty(-1)
 
     def __init__(self, **kwargs):
         super(FocusWithColorNavBar, self).__init__(**kwargs)
@@ -139,12 +155,21 @@ class FocusWithColorNavBar(FocusBehavior):
 
     def on_focused(self, instance, value, *largs):
         if(value):
+            if(self.attachedGif is not None and self.attachedGif._coreimage is not None):
+                self.attachedGif.anim_loop = 1
+                self.attachedGif.anim_delay = self.animDelay
+                self.attachedGif._coreimage.anim_reset(True)
+
             self.color = (1, 1, 1, 0.9)
             with instance.canvas.before:
                 Color(rgba=(0.1044,0.4659,0.4297, 0.8))
                 Rectangle(pos=instance.pos,size=instance.size,
                           group='borderImage')
         else:
+            if (self.attachedGif is not None and self.attachedGif._coreimage is not None):
+                self.attachedGif._coreimage._anim_index = 0
+                self.attachedGif._coreimage.anim_reset(True)
+                self.attachedGif._coreimage.anim_reset(False)
             self.color = (0.1044,0.4659,0.4297, 0.8)
 
             instance.canvas.before.remove_group('borderImage')

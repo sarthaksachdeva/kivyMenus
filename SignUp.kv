@@ -173,6 +173,7 @@ HomePage:
                                 app.root.transition = self.transition
                                 app.root.transition.direction = 'right'
                                 app.root.current = 'mainMenu' if  self.functionCall() else 'SignUp'
+                                self.focus = False
                             font_name:'Helsinki'
                             text: 'Sign Up'
 
@@ -192,6 +193,7 @@ HomePage:
                                 app.root.transition = self.transition
                                 app.root.transition.direction = 'right'
                                 app.root.current = 'mainMenu' if self.functionCall() else 'SignUp'
+                                self.focus = False
 
                             font_name:'Helsinki'
                             text: 'Cancel'
