@@ -203,8 +203,7 @@ navBar:
         size_hint: 0.08, 1
         background_color: (0.0, 0.0, 0.0, 0)
         on_release:
-            app.root.transition = self.transition
-            app.root.current = 'mainMenu'
+            app.switchScreen('mainMenu', self.transition)
             self.focus = False
         Image:
             source: './images/homePage4.png'

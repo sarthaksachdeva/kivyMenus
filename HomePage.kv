@@ -90,9 +90,7 @@ HomePage:
                 size_hint: 1, 0.15
                 background_color: C('#19b74e')
                 on_release:
-                    app.root.transition = self.transition
-                    app.root.transition.direction = 'right'
-                    app.root.current = 'mainMenu' if  self.functionCall() else 'home'
+                    app.switchScreen('mainMenu', self.transition) if  self.functionCall() else 0
                     self.focus = False
 
                 font_size: 14

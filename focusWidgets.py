@@ -10,6 +10,7 @@ from kivy.properties import StringProperty
 from kivy.uix.dropdown import DropDown
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import ObjectProperty, NumericProperty
+from kivy.uix.screenmanager import NoTransition
 from kivy.app import App
 import re
 
@@ -31,10 +32,11 @@ def handleKeyBoardEvents(instance, keycode):
                         instance.parent.parent, DropDown)):
                     instance.parent.parent.dismiss()
                 app = App.get_running_app()
+                transition = NoTransition()
                 if (instance.transition != None):
-                    app.root.transition = instance.transition
+                    transition = instance.transition
                 instance.focus = False
-                app.root.current = instance.nextScreen
+                app.switchScreen(instance.nextScreen, transition=transition)
 
         #if a drop down is attached open or close it
         elif(instance.attachedTo is not None):
