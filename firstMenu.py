@@ -11,7 +11,7 @@ from kivy.core.window import Window
 from kivy.core.text import LabelBase
 from kivy.uix.popup import Popup
 
-
+print("hello")
 from kivyDemos.kivyHomeMenuGit.DataBaseUtility.CustomerDataUtility import CustomerDataUtility
 
 from functools import partial
