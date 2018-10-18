@@ -11,7 +11,6 @@ bxL:
         size_hint: 1,0.5
 
         FocusButton:
-            focus: True
             on_press: root.parent.parent.load_next()
             background_color: C('#3498DB')
             StackLayout:
@@ -35,10 +34,8 @@ bxL:
         FocusButton:
             nextScreen: 'firstCollectionMenu'
             transition: RiseInTransition()
-            focus: True
             on_release:
-                app.root.transition = self.transition
-                app.root.current = 'firstCollectionMenu'
+                app.switchScreen('firstCollectionMenu', self.transition)
                 self.focus = False
             background_color: C('#2ECC71')
             StackLayout:
@@ -62,10 +59,8 @@ bxL:
         FocusButton:
             nextScreen: 'CustomerMenu'
             transition: RiseInTransition()
-            focus: True
             on_release:
-                app.root.transition = self.transition
-                app.root.current = 'CustomerMenu'
+                app.switchScreen('CustomerMenu', self.transition)
                 self.focus = False
             background_color: C('#1ABC9C')
             StackLayout:
@@ -92,7 +87,6 @@ bxL:
         orientation: 'horizontal'
         size_hint:1,0.25
         FocusButton:
-            focus: True
             background_color: C('#27AE60')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -158,10 +152,8 @@ bxL:
         FocusButton:
             nextScreen: 'CustomerDb'
             transition: RiseInTransition()
-            focus: True
             on_release:
-                app.root.transition = self.transition
-                app.root.current = 'CustomerDb'
+                app.switchScreen('CustomerDb', self.transition)
                 self.focus = False
             background_color: C('#95A5A6')
             on_create:
@@ -209,7 +201,6 @@ bxL:
                     text_size: self.size
                     text:  root.getText('rpinan')
         FocusButton:
-            focus: True
             background_color: C('#F3b200')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -263,7 +254,6 @@ bxL:
                     text_size: self.size
                     text:  root.getText('rpotdl')
         FocusButton:
-            focus: True
             background_color: C('#FF1D77')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -286,7 +276,6 @@ bxL:
                     text:  root.getText('rpotmn')
 
         FocusButton:
-            focus: True
             background_color: C('#632F00')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -311,7 +300,6 @@ bxL:
         FocusButton:
             attachedGif: stockImg
             animDelay: 0.05
-            focus: True
             background_color: C('#4617B4')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -337,7 +325,6 @@ bxL:
 
         #ANNUAL
         FocusButton:
-            focus: True
             background_color: C('#00c13F')
             on_create:
                 self.disabled = False if app.isUserAdmin() else True
@@ -366,8 +353,7 @@ bxL:
             animDelay: 0.05
             background_color: C('#000000')
             on_release:
-                app.root.transition = self.transition
-                app.root.current = 'home'
+                app.switchScreen('home', self.transition)
                 self.focus = False
             on_create:
                 self.disabled = False if app.isUserAdmin() else True

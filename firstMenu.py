@@ -131,23 +131,34 @@ class DemoApp(App, CustomerDataUtility):
         return True
 
     def build(self):
+        self.m_sm = ScreenManager(transition=WipeTransition())
+        self.switchScreen("home", transition=WipeTransition())
+        Window.bind(on_key_down=self.key_action)
+        return self.m_sm
 
+
+    def switchScreen(self, screenName, transition):
+        if(screenName == "home"):
+            self.switchToHomeScreen(transition)
+        elif(screenName == "mainMenu"):
+            self.switchToMainMenuScreen(transition)
+        elif(screenName == "firstCollectionMenu"):
+            self.switchToFirstCollectionScreen(transition)
+        elif(screenName == "CustomerMenu"):
+            self.switchToCustomerWidgetScreen(transition)
+        elif(screenName == "CustomerDb"):
+            self.switchToCustomerDbScreen(transition)
+        elif(screenName == "SignUp"):
+            self.switchToSignUpScreen(transition)
+
+    def switchToHomeScreen(self, transition):
+        home = Builder.load_file('HomePage.kv')
+        homeScreen = CustomScreen(name='home')
+        homeScreen.add_widget(home)
+        self.m_sm.switch_to(homeScreen, transition=transition, duration=0.3)
+
+    def switchToMainMenuScreen(self, transition):
         navbar = Builder.load_file('navBarMain.kv')
-        navbar2 = Builder.load_file('navBarSubMenu.kv')
-        navbar3 = Builder.load_file('navBarSubMenu.kv')
-        navbar4 = Builder.load_file('navBarSubMenu.kv')
-
-        navbar2.MenuName = 'Collection Menu'
-        navbar3.MenuName = 'Operation Inbound'
-        navbar4.MenuName = 'Inbound-Customer'
-
-        navbar2.Icon = './images/operationsOutbound.png'
-        navbar3.Icon = './images/union.png'
-        navbar4.Icon = './images/reports6.png'
-
-        navbar2.ColorMenuIcon = [0, 1, 0, 0.8]
-        navbar3.ColorMenuIcon = [0, 1, 0, 0.8]
-
         root = Builder.load_file('root.kv')
         root.navBar.add_widget(navbar)
         layout1 = Builder.load_file('layout.kv')
@@ -156,41 +167,49 @@ class DemoApp(App, CustomerDataUtility):
         root.boxes.add_widget(layout1)
         root.boxes.add_widget(layout2)
 
-        home = Builder.load_file('HomePage.kv')
-        homeScreen = CustomScreen(name='home')
-        homeScreen.add_widget(home)
-
         mainMenuScreen = CustomScreen(name='mainMenu')
         mainMenuScreen.add_widget(root)
+        self.m_sm.switch_to(mainMenuScreen, transition=transition, duration=0.3)
 
+    def switchToFirstCollectionScreen(self, transition):
+        navbar = Builder.load_file('navBarSubMenu.kv')
+        navbar.MenuName = 'Collection Menu'
+        navbar.Icon = './images/operationsOutbound.png'
+        navbar.ColorMenuIcon = [0, 1, 0, 0.8]
         firstCollectWidget = Builder.load_file('firstCollectionMenu.kv')
-        firstCollectWidget.navBar.add_widget(navbar2)
+        firstCollectWidget.navBar.add_widget(navbar)
         firstCollectionScreen = CustomScreen(name='firstCollectionMenu')
         firstCollectionScreen.add_widget(firstCollectWidget)
+        self.m_sm.switch_to(firstCollectionScreen, transition=transition, duration=0.3)
 
+    def switchToCustomerWidgetScreen(self, transition):
+        navbar = Builder.load_file('navBarSubMenu.kv')
+        navbar.MenuName = 'Operation Inbound'
+        navbar.Icon = './images/union.png'
+        navbar.ColorMenuIcon = [0, 1, 0, 0.8]
         CustomerWidget = Builder.load_file('Customer.kv')
-        CustomerWidget.navBar.add_widget(navbar3)
+        CustomerWidget.navBar.add_widget(navbar)
         CustomerWidgetScreen = CustomScreen(name='CustomerMenu')
         CustomerWidgetScreen.add_widget(CustomerWidget)
+        self.m_sm.switch_to(CustomerWidgetScreen, transition=transition, duration=0.3)
 
+    def switchToCustomerDbScreen(self, transition):
+        navbar = Builder.load_file('navBarSubMenu.kv')
+        navbar.MenuName = 'Inbound-Customer'
+        navbar.Icon = './images/reports6.png'
+        navbar.ColorMenuIcon = [0, 1, 0, 0.8]
         CustomerDbWidget = Builder.load_file('CustomerDatabaseScreen.kv')
-        CustomerDbWidget.navBar.add_widget(navbar4)
+        CustomerDbWidget.navBar.add_widget(navbar)
         CustomerDbWidgetScreen = CustomScreen(name='CustomerDb')
         CustomerDbWidgetScreen.add_widget(CustomerDbWidget)
+        self.m_sm.switch_to(CustomerDbWidgetScreen, transition=transition, duration=0.3)
 
+
+    def switchToSignUpScreen(self, transition):
         SignUpWidget = Builder.load_file('SignUp.kv')
         SignUpScreen = Screen(name='SignUp')
         SignUpScreen.add_widget(SignUpWidget)
-
-        sm = ScreenManager(transition=WipeTransition())
-        sm.add_widget(homeScreen)
-        sm.add_widget(mainMenuScreen)
-        sm.add_widget(firstCollectionScreen)
-        sm.add_widget(CustomerWidgetScreen)
-        sm.add_widget(CustomerDbWidgetScreen)
-        sm.add_widget(SignUpScreen)
-        Window.bind(on_key_down=self.key_action)
-        return sm
+        self.m_sm.switch_to(SignUpScreen, transition=transition, duration=0.3)
 
     def key_action(self, *args):
         # app.root.

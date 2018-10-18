@@ -213,6 +213,9 @@ firstCollectionMenu:
                     nextScreen: 'mainMenu'
                     transition: FallOutTransition()
                     functionCall: partial(app.addNewCustomer, customerIdInput, nameInput, localNameInput, addressInput, telephoneInput, self)
+                    on_release:
+                        app.switchScreen('mainMenu', self.transition) if  self.functionCall() else 0
+                        self.focus = False
                     Image:
                         size: self.parent.size
                         x: self.parent.x
@@ -232,9 +235,7 @@ firstCollectionMenu:
                     functionCall: partial(app.clearAddCustomerData, nameInput, localNameInput, addressInput, telephoneInput)
                     on_release:
                         trashCan._coreimage.anim_reset(True)
-                        app.root.transition = self.transition
-                        app.root.transition.direction = 'right'
-                        app.root.current = 'mainMenu' if  self.functionCall() else 'CustomerMenu'
+                        app.switchScreen('mainMenu', self.transition) if  self.functionCall() else 0
                         self.focus = False
 
 
