@@ -1,11 +1,18 @@
-from kivyDemos.kivyHomeMenuGit.kivyMenus.firstMenu import DemoApp
-from kivyDemos.kivyHomeMenuGit.DataBaseUtility.MongoDbUtility import MongoDbHelper
-from kivyDemos.kivyHomeMenuGit.Threads.PrinterThread import PrinterThread
+import sys
+
 
 import queue
 from threading import Event
 
 if __name__ == '__main__':
+    
+    sys.path.append('/home/pi/python_p/kivyAppPrinterAndDb/KivyDbAndThreads/DataBaseUtility')
+    sys.path.append('/home/pi/python_p/kivyAppPrinterAndDb/KivyDbAndThreads/Threads')
+
+    print(sys.path)
+    from firstMenu import DemoApp
+    from MongoDbUtility import MongoDbHelper
+    from PrinterThread import PrinterThread
     # create global object for using mongo db.
     globalMongoDbHelper = MongoDbHelper()
 

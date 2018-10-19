@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty, StringProperty, ColorProperty, BooleanProperty, ListProperty
 from kivy.uix.boxlayout import BoxLayout
-from kivyDemos.kivyHomeMenuGit.kivyMenus.texts import textArray, widgetDict
+from texts import textArray, widgetDict
 from kivy.uix.dropdown import DropDown
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.screenmanager import WipeTransition
@@ -12,11 +12,11 @@ from kivy.core.text import LabelBase
 from kivy.uix.popup import Popup
 
 
-from kivyDemos.kivyHomeMenuGit.DataBaseUtility.CustomerDataUtility import CustomerDataUtility
+from CustomerDataUtility import CustomerDataUtility
 
 from functools import partial
-from kivyDemos.kivyHomeMenuGit.kivyMenus import focusWidgets
-from kivyDemos.kivyHomeMenuGit.kivyMenus import recycleViewWidgets
+import focusWidgets
+import recycleViewWidgets
 
 LabelBase.register('Acme', fn_regular='./fonts/Acme-Regular.ttf')
 LabelBase.register('Helsinki', fn_regular='./fonts/helsinki.ttf')

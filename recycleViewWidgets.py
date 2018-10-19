@@ -6,8 +6,8 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.popup import Popup
 from kivy.app import App
-from kivyDemos.kivyHomeMenuGit.kivyMenus.focusWidgets import FocusButton4,FocusWithColor
-from kivyDemos.kivyHomeMenuGit.kivyMenus.tableToStringIdMapper import stringIdToDbMapper
+from focusWidgets import FocusButton4,FocusWithColor
+from tableToStringIdMapper import stringIdToDbMapper
 
 
 class TextInputPopup(Popup):
