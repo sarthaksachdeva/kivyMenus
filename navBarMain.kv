@@ -81,9 +81,7 @@ navBar:
                 self.disabled = False if app.isUserAdmin() else True
             on_release:
                 burgerDD.dismiss()
-                app.root.transition = self.transition
-                app.root.transition.direction = 'right'
-                app.root.current = 'SignUp'
+                app.switchScreen('SignUp', self.transition)
                 self.focus = False
             size_hint_y: None
             height: 44
@@ -95,9 +93,7 @@ navBar:
             text: 'Log Out'
             on_release:
                 burgerDD.dismiss()
-                app.root.transition = self.transition
-                app.root.transition.direction = 'right'
-                app.root.current = 'home' if self.functionCall()  else 'mainMenu'
+                app.switchScreen('home', self.transition) if self.functionCall()  else 0
                 self.focus = False
             size_hint_y: None
             height: 44

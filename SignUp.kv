@@ -170,9 +170,7 @@ HomePage:
                             size_hint: 0.45, 1
                             background_color: C('#19b74e')
                             on_release:
-                                app.root.transition = self.transition
-                                app.root.transition.direction = 'right'
-                                app.root.current = 'mainMenu' if  self.functionCall() else 'SignUp'
+                                app.switchScreen('mainMenu', self.transition) if  self.functionCall() else 0
                                 self.focus = False
                             font_name:'Helsinki'
                             text: 'Sign Up'
@@ -190,9 +188,7 @@ HomePage:
                             size_hint:  0.45, 1
                             background_color: C('#E74C3C')
                             on_release:
-                                app.root.transition = self.transition
-                                app.root.transition.direction = 'right'
-                                app.root.current = 'mainMenu' if self.functionCall() else 'SignUp'
+                                app.switchScreen('mainMenu', self.transition) if  self.functionCall() else 0
                                 self.focus = False
 
                             font_name:'Helsinki'
